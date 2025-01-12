@@ -1,11 +1,14 @@
 import { View, Text } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
-function CountDownScreen({ navigation }) {
+function CountDownScreen({ navigation, route }) {
+    const { excludedPlayerId } = route.params;
+
     return (
         <View>
             <Text>Countdown</Text>
-            <PrimaryButton onPress={() => navigation.navigate("VoteScreen")}>Continue</PrimaryButton>
+            <Text>Excluded: {excludedPlayerId}</Text>
+            <PrimaryButton onPress={() => navigation.navigate("VoteScreen", { excludedPlayerId: excludedPlayerId})}>Continue</PrimaryButton>
         </View>
     )
 }

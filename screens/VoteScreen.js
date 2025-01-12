@@ -3,9 +3,10 @@ import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import { GameContext } from "../store/context/GameContext";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
-function VoteScreen(){
+function VoteScreen({ navigation, route }){
     const { players } = useContext(GameContext);
     const [selectedPlayer, setSelectedPlayer] = useState(null);
+    const { excludedPlayerId } = route.params;
 
     const renderItem = ({ item }) => (
         <Pressable 
@@ -23,6 +24,7 @@ function VoteScreen(){
         <View>
             <Text>Vote the liar out</Text>
             <Text>Selected: {selectedPlayer}</Text>
+            <Text>Excluded: {excludedPlayerId}</Text>
             <FlatList
                 data={players}
                 renderItem={renderItem}
@@ -30,7 +32,7 @@ function VoteScreen(){
                 numColumns={2}  // Display two items per row
                 columnWrapperStyle={styles.row}  // Add some space between columns
             />
-            <PrimaryButton>Vote out!</PrimaryButton>
+            <PrimaryButton onPress={() => navigation.navigate("VoteResults", { playerIdVotedOut: selectedPlayer, excludedPlayerId: excludedPlayerId})}>Vote out!</PrimaryButton>
         </View>
     )
 }
