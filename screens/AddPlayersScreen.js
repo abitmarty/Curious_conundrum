@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Text, TextInput, View, FlatList, StyleSheet } from "react-native";
+import { Text, TextInput, View, FlatList, StyleSheet, Pressable } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { GameContext } from "../store/context/GameContext";
 
@@ -12,6 +12,10 @@ function AddPlayersScreen() {
     addPlayer(playerName);
     setPlayerName(""); // Clear input field
   };
+
+  const removePlayerHandler = (playerId) => {
+    removePlayer(playerId)
+  }
 
   return (
     <View style={styles.container}>
@@ -27,7 +31,15 @@ function AddPlayersScreen() {
         data={players}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Text style={styles.playerItem}>{item}</Text>
+            <View style={styles.players}>
+                <Text style={styles.playerItem}>{item.name}</Text>
+                <Pressable
+                style={styles.removePlayer}
+                onPress={() => removePlayerHandler(item.id)}
+                >
+                    <Text>x</Text>
+                </Pressable>
+            </View>
         )}
       />
     </View>
@@ -60,4 +72,15 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       marginVertical: 5,
     },
+    players: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    removePlayer: {
+        backgroundColor: "red",
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        borderRadius: 10
+    }
   });
