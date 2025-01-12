@@ -11,6 +11,8 @@ import SetRoundsScreen from './screens/SetRoundsScreen';
 import SetThemeScreen from './screens/SetThemeScreen';
 import HowToPlayScreen from './screens/HowToPlayScreen';
 import ViewCardScreen from './screens/ViewCardScreen';
+import CountDownScreen from './screens/CountdownScreen';
+import VoteScreen from './screens/VoteScreen';
 
 
 const Stack = createStackNavigator();
@@ -20,13 +22,15 @@ export default function App() {
     <SettingsContextProvider>
       <GameContextProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="ViewCardScreen">
+          <Stack.Navigator initialRouteName="CountDownScreen">
             <Stack.Screen name="Home" component={StartGameScreen} />
             <Stack.Screen name="AddPlayersScreen" component={AddPlayersScreen} />
             <Stack.Screen name="SetRoundsScreen" component={SetRoundsScreen} />
             <Stack.Screen name="SetThemeScreen" component={SetThemeScreen} />
             <Stack.Screen name="HowToPlayScreen" component={HowToPlayScreen} />
             <Stack.Screen name="ViewCardScreen" component={ViewCardScreen} />
+            <Stack.Screen name="CountDownScreen" component={CountDownScreen} />
+            <Stack.Screen name="VoteScreen" component={VoteScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </GameContextProvider>

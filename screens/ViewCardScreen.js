@@ -10,19 +10,51 @@ function ViewCardScreen({ navigation }) {
     const currentPlayer = players[currentPlayerIndex];
 
     const nextPlayer = () => {
-        setCurrentPlayerIndex(currentPlayerIndex + 1)
+        if (currentPlayerIndex < players.length - 1) {
+            setCurrentPlayerIndex(currentPlayerIndex + 1);
+        } else {
+            // No more players, navigate to the next screen
+            navigation.navigate("CountDownScreen"); // Replace with your next screen name
+        }
     };
+
+    const changePhase = () => {
+        if (phase === "actionPhase") {
+            setPhase("viewingPhase")
+        }
+        else {
+            setPhase("actionPhase")
+            nextPlayer();
+        }
+    }
 
     return (
         <View>
             <Text>View card screen</Text>
+            <Text>{currentPlayerIndex}</Text>
 
+            {phase === "actionPhase" && (
             <View>
                 <Text>Give the phone to:</Text>
-                <Text>Playername</Text>
+                <Text>{currentPlayer.name}</Text>
+                <Text> </Text>
 
-                <PrimaryButton>Show statement</PrimaryButton>
+                <PrimaryButton onPress={changePhase}>Show statement</PrimaryButton>
             </View>
+            )}
+
+            {phase === "viewingPhase" && (
+            <View>
+                <Text>Read the statement:</Text>
+                <Text>{currentPlayer.name}</Text>
+                <Text>Who is the prettiest?</Text>
+
+                <PrimaryButton onPress={changePhase}>
+                {currentPlayerIndex === players.length - 1 ? "Start countdown" : "Next player"}
+                </PrimaryButton>
+            </View>
+            )}
+            
         </View>
     )
 }
