@@ -3,7 +3,7 @@ import { Text, TextInput, View, FlatList, StyleSheet, Pressable } from "react-na
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { GameContext } from "../store/context/GameContext";
 
-function AddPlayersScreen() {
+function AddPlayersScreen({ navigation }) {
   const [playerName, setPlayerName] = useState("");
   const { players, addPlayer, removePlayer } = useContext(GameContext);
 
@@ -27,6 +27,7 @@ function AddPlayersScreen() {
         onChangeText={setPlayerName}
       />
       <PrimaryButton onPress={addPlayerHandler}>Add</PrimaryButton>
+      <PrimaryButton onPress={() => navigation.navigate("SetRoundsScreen")}>Continue</PrimaryButton>
       <FlatList
         data={players}
         keyExtractor={(item, index) => index.toString()}
