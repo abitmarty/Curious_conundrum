@@ -6,6 +6,7 @@ export const GameContext = createContext({
   players: [], // Array to store player names or objects
   addPlayer: (player) => {}, // Function to add a player
   removePlayer: (playerId) => {}, // Function to remove a player
+  changeScore: (playerId, addition) => {}, // Function to change player's score
 });
 
 function GameContextProvider({ children }) {
@@ -44,7 +45,7 @@ function GameContextProvider({ children }) {
 
   // Function to add a player to the list
   function addPlayer(playerName) {
-    const newPlayer = { id: uuid.v4(), name: playerName };
+    const newPlayer = { id: uuid.v4(), name: playerName, score: 0 };
     setPlayers((currentPlayers) => [...currentPlayers, newPlayer]);
   }
 
@@ -55,10 +56,22 @@ function GameContextProvider({ children }) {
     );
   }
 
+  // Function to change score of player
+  function changeScore(playerId, newScore) {
+    setPlayers((currentPlayers) =>
+      currentPlayers.map((player) =>
+        player.id === playerId
+          ? { ...player, score: newScore }
+          : player
+      )
+    );
+  }
+
   const value = {
     players: players,
     addPlayer: addPlayer,
     removePlayer: removePlayer,
+    changeScore: changeScore,
   };
 
   return (

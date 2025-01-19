@@ -13,7 +13,7 @@ function SettingsContextProvider({ children }) {
   useEffect(() => {
     async function loadSettings() {
       const savedSettings = await AsyncStorage.getItem("gameSettings");
-      setSettings(savedSettings ? JSON.parse(savedSettings) : { rounds: 10, gameMode: "casual" });
+      setSettings(savedSettings ? JSON.parse(savedSettings) : { rounds: 10, gameMode: "casual", roundsPlayed: 0 });
     }
     loadSettings();
   }, []);
@@ -27,7 +27,7 @@ function SettingsContextProvider({ children }) {
   }
 
   function resetSettings() {
-    const defaultSettings = { rounds: 10, gameMode: "casual" };
+    const defaultSettings = { rounds: 10, gameMode: "casual", roundsPlayed: 0 };
     setSettings(defaultSettings);
     AsyncStorage.setItem("gameSettings", JSON.stringify(defaultSettings));
   }

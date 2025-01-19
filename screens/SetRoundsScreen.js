@@ -1,10 +1,28 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import { SettingsContext } from "../store/context/SettingsContext";
+import { GameContext } from "../store/context/GameContext";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import { useIsFocused } from "@react-navigation/native";
+
 
 function SetRoundsScreen({ navigation }) {
     const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
+    const { players, changeScore } = useContext(GameContext);
+
+    const isFocused = useIsFocused(); // Hook to track if the screen is currently visible
+
+    // Update scores whenever the screen is opened
+    useEffect(() => {
+        if (isFocused) {
+            updateSetting('roundsPlayed', 0);
+
+            // Set every player's score to zero
+            players.forEach(player => {
+                changeScore(player.id, 0); // Update each player's score to 0
+            });
+        }
+    }, [isFocused]); // Re-run effect when `isFocused` changes
 
     return (
         <View>

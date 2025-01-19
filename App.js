@@ -24,8 +24,8 @@ export default function App() {
     <SettingsContextProvider>
       <GameContextProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="VoteResults">
-            <Stack.Screen name="Home" component={StartGameScreen} />
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={StartGameScreen} options={{ headerShown: false }} />
             <Stack.Screen name="AddPlayersScreen" component={AddPlayersScreen} />
             <Stack.Screen name="SetRoundsScreen" component={SetRoundsScreen} />
             <Stack.Screen name="SetThemeScreen" component={SetThemeScreen} />
