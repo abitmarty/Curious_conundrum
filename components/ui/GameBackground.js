@@ -16,9 +16,7 @@ function GameBackground({ children }) {
                 resizeMode="cover"
             >
             </ImageBackground>
-            <View style={styles.gameButtons}>
-                {children}
-            </View>
+            {children}
         </View>
     )
 }
@@ -44,9 +42,4 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.background,
     },
-    gameButtons: {
-        position: 'absolute',
-        width: '100%',
-        bottom: 100
-    }
 })
