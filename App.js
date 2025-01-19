@@ -26,7 +26,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={StartGameScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="AddPlayersScreen" component={AddPlayersScreen} />
+            <Stack.Screen name="AddPlayersScreen" component={AddPlayersScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SetRoundsScreen" component={SetRoundsScreen} />
             <Stack.Screen name="SetThemeScreen" component={SetThemeScreen} />
             <Stack.Screen name="HowToPlayScreen" component={HowToPlayScreen} />

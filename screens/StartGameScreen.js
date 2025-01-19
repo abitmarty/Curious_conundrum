@@ -19,7 +19,7 @@ export default StartGameScreen;
 const styles = StyleSheet.create({
     buttonContainer: {
         position: 'absolute',
-        bottom: 70, // 40px from the bottom of the screen
+        bottom: 60, // 40px from the bottom of the screen
         left: 0,
         right: 0,
         alignItems: 'center', // Horizontally center the button

@@ -1,39 +1,41 @@
-import { View, Text, Pressable, StyleSheet, ImageBackground } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Pressable, ImageBackground } from "react-native";
 import Colors from '../../constants/colors';
 
-function PrimaryButton({ children, onPress }) {
-    return (
+function SmallButton({ children, onPress }) {
+    const [isPressed, setIsPressed] = useState(false);
+
+    const handlePressIn = () => setIsPressed(true);
+    const handlePressOut = () => setIsPressed(false);
+
+    return(
         <View style={styles.buttonOuterContainer}>
             <Pressable
-                style={({ pressed }) => 
-                    pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer
-                }
+                style={styles.buttonInnerContainer}
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
                 onPress={onPress}
-                android_ripple={{ color: Colors.primary600 }}
             >
                 <ImageBackground
-                    source={require('../../assets/button/button_continue.png')}
+                    source={isPressed 
+                        ? require('../../assets/button/button_small_close_pressed.png') 
+                        : require('../../assets/button/button_small_close.png')}
                     style={styles.imageBackground}
                     resizeMode="cover"
-                >
-                    <Text style={styles.buttonText}>
-                        {children}
-                    </Text>
-                </ImageBackground>
+                />
             </Pressable>
         </View>
-    );
+    )
 }
 
-export default PrimaryButton;
+export default SmallButton;
 
 const styles = StyleSheet.create({
     buttonOuterContainer: {
-        borderRadius: 28,
         margin: 4,
         overflow: 'hidden',
-        aspectRatio: 309 / 84,
-        width: '60%',
+        aspectRatio: 72 / 72,
+        width: '12%',
     },
     buttonInnerContainer: {
         flex: 1,
@@ -52,8 +54,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20, // Adjust as needed
         fontWeight: 'bold',
-    },
-    pressed: {
-        opacity: 0.75,
     },
 });
