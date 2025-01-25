@@ -1,9 +1,17 @@
 import { View, Text, Pressable, StyleSheet, ImageBackground } from 'react-native';
 import Colors from '../../constants/colors';
+import FontSize from '../../constants/FontSize';
 
-function PrimaryButton({ children, onPress }) {
+function PrimaryButton({ children, onPress, typeBtn="continue" }) {
+    let backgroundSource;
+
+    if (typeBtn === "add") {
+        backgroundSource = require('../../assets/button/button_add.png')
+    } else {
+        backgroundSource = require('../../assets/button/button_continue.png')
+    }
     return (
-        <View style={styles.buttonOuterContainer}>
+        <View style={typeBtn === "add" ? [styles.buttonAddContainer, styles.commonButtonHeight] : [styles.buttonOuterContainer, styles.commonButtonHeight]}>
             <Pressable
                 style={({ pressed }) => 
                     pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer
@@ -12,7 +20,7 @@ function PrimaryButton({ children, onPress }) {
                 android_ripple={{ color: Colors.primary600 }}
             >
                 <ImageBackground
-                    source={require('../../assets/button/button_continue.png')}
+                    source={backgroundSource}
                     style={styles.imageBackground}
                     resizeMode="cover"
                 >
@@ -33,7 +41,15 @@ const styles = StyleSheet.create({
         margin: 4,
         overflow: 'hidden',
         aspectRatio: 309 / 84,
-        width: '60%',
+    },
+    buttonAddContainer: {
+        borderRadius: 28,
+        margin: 4,
+        overflow: 'hidden',
+        aspectRatio: 84 / 84,
+    },
+    commonButtonHeight: {
+        height: 70,
     },
     buttonInnerContainer: {
         flex: 1,
@@ -50,7 +66,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         textAlign: 'center',
-        fontSize: 20, // Adjust as needed
+        fontSize: FontSize.big,
         fontWeight: 'bold',
     },
     pressed: {

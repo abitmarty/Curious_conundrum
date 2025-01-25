@@ -1,13 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import { SafeAreaView, Text, TextInput, View, FlatList, StyleSheet, Pressable } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { GameContext } from "../store/context/GameContext";
 import GameBackground from "../components/ui/GameBackground";
 import SmallButton from "../components/ui/SmallButton";
+import InputCard from "../components/ui/InputCard";
+import Colors from '../constants/colors';
 
 function AddPlayersScreen({ navigation }) {
   const [playerName, setPlayerName] = useState("");
   const { players, addPlayer, removePlayer } = useContext(GameContext);
+  const inputRef = useRef(null);
 
   const addPlayerHandler = () => {
     if (playerName.trim().length === 0) return;
@@ -19,35 +22,43 @@ function AddPlayersScreen({ navigation }) {
     removePlayer(playerId)
   }
 
+  useEffect(() => {
+    inputRef.current?.focus(); // Focus the input field
+  }, []);
+
   return (
     <GameBackground style={styles.container}>
       <SafeAreaView style={styles.safeAreaContainer}>
         <SmallButton onPress={() => navigation.navigate("Home")}/>
-        <Text style={styles.title}>Add Players</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter player name"
-          value={playerName}
-          onChangeText={setPlayerName}
-        />
-        <PrimaryButton onPress={addPlayerHandler}>Add</PrimaryButton>
-        <PrimaryButton onPress={() => navigation.navigate("SetRoundsScreen")}>Continue</PrimaryButton>
-        <FlatList
-          data={players}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-              <View style={styles.players}>
-                  <Text style={styles.playerItem}>{item.name}</Text>
-                  <Pressable
-                  style={styles.removePlayer}
-                  onPress={() => removePlayerHandler(item.id)}
-                  >
-                      <Text>x</Text>
-                  </Pressable>
-              </View>
-          )}
-        />
+          <View style={styles.mainContainer}>
+            <InputCard
+              title="Add Players:"
+              placeholder="Player name"
+              value={playerName}
+              onChangeText={setPlayerName}
+              onSubmitEditing={addPlayerHandler}
+            />
+            <FlatList
+              data={players}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                  <View style={styles.players}>
+                      <Text style={styles.playerItem}>{item.name}</Text>
+                      <Pressable
+                      style={styles.removePlayer}
+                      onPress={() => removePlayerHandler(item.id)}
+                      >
+                          <Text>x</Text>
+                      </Pressable>
+                  </View>
+              )}
+            />
+          </View>
       </SafeAreaView>
+      <View style={styles.footer}>
+            <PrimaryButton onPress={() => navigation.navigate("SetRoundsScreen")}>Continue</PrimaryButton>
+            <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
+          </View>
     </GameBackground>
   );
 }
@@ -63,6 +74,21 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       padding: 20,
+    },
+    mainContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: "center"
+    },
+    footer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderTopWidth: 1,
+      borderTopColor: Colors.border,
+      backgroundColor: Colors.background,
+      height: 100,
+      
     },
     title: {
       fontSize: 20,
