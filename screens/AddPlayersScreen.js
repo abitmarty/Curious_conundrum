@@ -50,6 +50,7 @@ function AddPlayersScreen({ navigation }) {
                 </View>
               )}
               contentContainerStyle={styles.flatListContent}
+              columnWrapperStyle={styles.row}
             />
           </View>
       </SafeAreaView>
@@ -74,11 +75,9 @@ const styles = StyleSheet.create({
       padding: 20,
     },
     cardContainer: {
-      width: '50%',
+      width: '100%',
+      alignItems: "center",
       justifyContent: 'center',
-      alignItems: 'center',
-      paddingVertical: 10,
-      backgroundColor: 'red',
     },
     mainContainer: {
       flex: 1,
@@ -87,7 +86,6 @@ const styles = StyleSheet.create({
     },
     flat: {
       width: '100%',
-      backgroundColor: 'green',
     },
     flatListContent: {
       alignItems: 'center',
@@ -125,14 +123,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: 'blue',
         borderWidth: 1,
         borderColor: 'red'
     },
     removePlayer: {
-        backgroundColor: "red",
         paddingHorizontal: 10,
         paddingVertical: 5,
         borderRadius: 10
+    },
+    row: {
+      width: '50%',
+      alignItems: 'flex-start',
+      paddingVertical: 20,
     }
   });
