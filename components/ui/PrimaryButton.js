@@ -2,16 +2,26 @@ import { View, Text, Pressable, StyleSheet, ImageBackground } from 'react-native
 import Colors from '../../constants/colors';
 import FontSize from '../../constants/FontSize';
 
-function PrimaryButton({ children, onPress, typeBtn="continue" }) {
+function PrimaryButton({ children, onPress, typeBtn="continue", style }) {
     let backgroundSource;
 
     if (typeBtn === "add") {
         backgroundSource = require('../../assets/button/button_add.png')
+    } else if (typeBtn === "remove") {
+        backgroundSource = require('../../assets/button/button_remove.png')
     } else {
         backgroundSource = require('../../assets/button/button_continue.png')
     }
+
+    // Combine default and custom styles
+    const containerStyle = [
+        (typeBtn === "add" || typeBtn === "remove") ? styles.buttonSquareContainer : styles.buttonOuterContainer,
+        styles.commonButton,
+        style
+    ];
+
     return (
-        <View style={typeBtn === "add" ? [styles.buttonAddContainer, styles.commonButtonHeight] : [styles.buttonOuterContainer, styles.commonButtonHeight]}>
+        <View style={containerStyle}>
             <Pressable
                 style={({ pressed }) => 
                     pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer
@@ -38,18 +48,18 @@ export default PrimaryButton;
 const styles = StyleSheet.create({
     buttonOuterContainer: {
         borderRadius: 28,
-        margin: 4,
-        overflow: 'hidden',
         aspectRatio: 309 / 84,
     },
-    buttonAddContainer: {
-        borderRadius: 28,
-        margin: 4,
-        overflow: 'hidden',
+    buttonSquareContainer: {
+        borderRadius: 20,
         aspectRatio: 84 / 84,
     },
-    commonButtonHeight: {
-        height: 70,
+    commonButton: {
+        height: 64,
+        margin: 4,
+        overflow: 'hidden',
+        padding: 0,
+        margin: 0,
     },
     buttonInnerContainer: {
         flex: 1,

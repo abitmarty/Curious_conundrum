@@ -6,6 +6,7 @@ import GameBackground from "../components/ui/GameBackground";
 import SmallButton from "../components/ui/SmallButton";
 import InputCard from "../components/ui/InputCard";
 import Colors from '../constants/colors';
+import PlayerCard from "../components/ui/PlayerCard";
 
 function AddPlayersScreen({ navigation }) {
   const [playerName, setPlayerName] = useState("");
@@ -40,25 +41,22 @@ function AddPlayersScreen({ navigation }) {
             />
             <FlatList
               data={players}
+              numColumns={2}
               keyExtractor={(item, index) => index.toString()}
+              style={styles.flat}
               renderItem={({ item }) => (
-                  <View style={styles.players}>
-                      <Text style={styles.playerItem}>{item.name}</Text>
-                      <Pressable
-                      style={styles.removePlayer}
-                      onPress={() => removePlayerHandler(item.id)}
-                      >
-                          <Text>x</Text>
-                      </Pressable>
-                  </View>
+                <View style={styles.cardContainer}>
+                  <PlayerCard onPress={() => removePlayerHandler(item.id)}>{item.name}</PlayerCard>
+                </View>
               )}
+              contentContainerStyle={styles.flatListContent}
             />
           </View>
       </SafeAreaView>
       <View style={styles.footer}>
-            <PrimaryButton onPress={() => navigation.navigate("SetRoundsScreen")}>Continue</PrimaryButton>
-            <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
-          </View>
+        <PrimaryButton onPress={() => { addPlayerHandler(); navigation.navigate("SetRoundsScreen")}}>Continue</PrimaryButton>
+        <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
+      </View>
     </GameBackground>
   );
 }
@@ -75,10 +73,25 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 20,
     },
+    cardContainer: {
+      width: '50%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 10,
+      backgroundColor: 'red',
+    },
     mainContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: "center"
+    },
+    flat: {
+      width: '100%',
+      backgroundColor: 'green',
+    },
+    flatListContent: {
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     footer: {
       flexDirection: 'row',
@@ -87,8 +100,7 @@ const styles = StyleSheet.create({
       borderTopWidth: 1,
       borderTopColor: Colors.border,
       backgroundColor: Colors.background,
-      height: 100,
-      
+      height: 90,
     },
     title: {
       fontSize: 20,
@@ -112,7 +124,10 @@ const styles = StyleSheet.create({
     players: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        backgroundColor: 'blue',
+        borderWidth: 1,
+        borderColor: 'red'
     },
     removePlayer: {
         backgroundColor: "red",
