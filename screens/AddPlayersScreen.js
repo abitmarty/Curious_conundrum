@@ -29,31 +29,29 @@ function AddPlayersScreen({ navigation }) {
 
   return (
     <GameBackground style={styles.container}>
-      <SafeAreaView style={styles.safeAreaContainer}>
         <SmallButton onPress={() => navigation.navigate("Home")}/>
-          <View style={styles.mainContainer}>
-            <InputCard
-              title="Add Players:"
-              placeholder="Player name"
-              value={playerName}
-              onChangeText={setPlayerName}
-              onSubmitEditing={addPlayerHandler}
-            />
-            <FlatList
-              data={players}
-              numColumns={2}
-              keyExtractor={(item, index) => index.toString()}
-              style={styles.flat}
-              renderItem={({ item }) => (
-                <View style={styles.cardContainer}>
-                  <PlayerCard onPress={() => removePlayerHandler(item.id)}>{item.name}</PlayerCard>
-                </View>
-              )}
-              contentContainerStyle={styles.flatListContent}
-              columnWrapperStyle={styles.row}
-            />
-          </View>
-      </SafeAreaView>
+        <View style={styles.mainContainer}>
+          <InputCard
+            title="Add Players:"
+            placeholder="Player name"
+            value={playerName}
+            onChangeText={setPlayerName}
+            onSubmitEditing={addPlayerHandler}
+          />
+          <FlatList
+            data={players}
+            numColumns={2}
+            keyExtractor={(item, index) => index.toString()}
+            style={styles.flat}
+            renderItem={({ item }) => (
+              <View style={styles.cardContainer}>
+                <PlayerCard onPress={() => removePlayerHandler(item.id)}>{item.name}</PlayerCard>
+              </View>
+            )}
+            contentContainerStyle={styles.flatListContent}
+            columnWrapperStyle={styles.row}
+          />
+        </View>
       <View style={styles.footer}>
         <PrimaryButton onPress={() => { addPlayerHandler(); navigation.navigate("SetRoundsScreen")}}>Continue</PrimaryButton>
         <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
@@ -65,11 +63,6 @@ function AddPlayersScreen({ navigation }) {
 export default AddPlayersScreen; // Correct default export
 
 const styles = StyleSheet.create({
-    safeAreaContainer: {
-      flex: 1,
-      paddingTop: 20, // Adjust for top bar padding if needed
-      paddingHorizontal: 10,
-    },
     container: {
       flex: 1,
       padding: 20,
@@ -98,7 +91,11 @@ const styles = StyleSheet.create({
       borderTopWidth: 1,
       borderTopColor: Colors.border,
       backgroundColor: Colors.background,
+      position: 'absolute',
       height: 90,
+      bottom: 0,
+      left: 0,
+      right: 0,
     },
     title: {
       fontSize: 20,

@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import Colors from '../../constants/colors';
 import { useRoute } from '@react-navigation/native';
 
@@ -23,7 +23,9 @@ function GameBackground({ children }) {
                 resizeMode="cover"
             >
             </ImageBackground>
-            {children}
+            <SafeAreaView style={styles.safeAreaContainer}>
+                {children}
+            </SafeAreaView>
         </View>
     )
 }
@@ -31,6 +33,11 @@ function GameBackground({ children }) {
 export default GameBackground;
 
 const styles = StyleSheet.create({
+    safeAreaContainer: {
+        flex: 1,
+        paddingTop: 20, // Adjust for top bar padding if needed
+        paddingHorizontal: 10,
+    },
     backgroundTop: {
         width: '100%',
         height: undefined,
