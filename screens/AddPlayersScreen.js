@@ -28,7 +28,7 @@ function AddPlayersScreen({ navigation }) {
   }, []);
 
   return (
-    <GameBackground style={styles.container}>
+    <GameBackground>
         <SmallButton onPress={() => navigation.navigate("Home")}/>
         <View style={styles.mainContainer}>
           <InputCard
@@ -63,10 +63,6 @@ function AddPlayersScreen({ navigation }) {
 export default AddPlayersScreen; // Correct default export
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 20,
-    },
     cardContainer: {
       width: '100%',
       alignItems: "center",
@@ -75,7 +71,7 @@ const styles = StyleSheet.create({
     mainContainer: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: "center"
+      alignItems: "center",
     },
     flat: {
       width: '100%',
