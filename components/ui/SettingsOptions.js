@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, ImageBackground } from "react-native";
 import { GameContext } from "../../store/context/GameContext";
 import { SettingsContext } from "../../store/context/SettingsContext";
+import FontSize from "../../constants/FontSize";
+import Colors from '../../constants/colors';
 
 function SettingsOptions({ setting, options }){
     const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
@@ -10,10 +12,27 @@ function SettingsOptions({ setting, options }){
     return (
         <View style={styles.optionContainer}>
             {options.map((option) => (
-                <Pressable style={settings.rounds === option ? styles. choiceActive : styles.choiceInactive}
-                onPress={() => updateSetting(setting, option)}>
-                    <Text>{option}</Text>
-                </Pressable>
+                <View style={styles.choiseContainer}>
+                    <Pressable
+                    onPress={() => updateSetting(setting, option)}
+                    style={({ pressed }) => 
+                        pressed ? [styles.optionsPressable, styles.pressed] : styles.optionsPressable
+                    }
+                    android_ripple={{ color: Colors.primary600 }}
+                    >
+                        <ImageBackground
+                            source={settings.rounds === option
+                                ? require('../../assets/card/input_card.png')
+                                : require('../../assets/card/input_card_black.png')} // Replace with your actual image
+                            style={styles.choiceBackground} // New style for image background
+                            resizeMode="cover"
+                        >
+                            <Text style={styles.choiceText}>
+                                {option}
+                            </Text>
+                        </ImageBackground>
+                    </Pressable>
+                </View>
             ))}
         </View>
     )
@@ -27,12 +46,24 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-around'
     },
-    choiceInactive: {
-        backgroundColor: "red",
-        padding: 10
+    choiceBackground: {
+        aspectRatio: 425 / 161,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    choiceActive: {
-        backgroundColor: "green",
-        padding: 10
+    choiceText: {
+        fontSize: FontSize.mid,
+        color: '#fff'
     },
+    optionsPressable: {
+        overflow: 'hidden'
+    },
+    pressed: {
+        opacity: 0.75,
+    },
+    choiseContainer: {
+        width: '25%',
+        borderRadius: 10,
+        overflow: 'hidden'
+    }
 })
