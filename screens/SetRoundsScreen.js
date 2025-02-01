@@ -7,6 +7,7 @@ import SmallButton from "../components/ui/SmallButton";
 import SettingsCard from "../components/ui/SettingsCard";
 import { SettingsContext } from "../store/context/SettingsContext";
 import { GameContext } from "../store/context/GameContext";
+import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 
 function SetRoundsScreen({ navigation }) {
     const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
@@ -31,7 +32,7 @@ function SetRoundsScreen({ navigation }) {
             <View style={styles.mainContainer}>
                 <SettingsCard setting="rounds" options={[5, 10, 15]}></SettingsCard>
             </View>
-            <PrimaryButton onPress={() => navigation.navigate("SetThemeScreen")}>Continue</PrimaryButton>
+            <PrimaryButtonBottom onPress={() => navigation.navigate("SetThemeScreen")}>Continue</PrimaryButtonBottom>
         </GameBackground>
     )
 }

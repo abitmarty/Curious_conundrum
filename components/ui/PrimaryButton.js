@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
     commonButton: {
         height: 64,
         margin: 4,
-        overflow: 'hidden',
         padding: 0,
         margin: 0,
+        overflow: 'hidden',
     },
     buttonInnerContainer: {
         flex: 1,

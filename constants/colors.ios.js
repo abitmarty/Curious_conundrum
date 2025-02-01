@@ -4,8 +4,10 @@ const Colors = {
     primary700: '#4e0329',
     primary800: '#3b021f',
     accent500: '#ddb52f',
-    background: "#3C3860",
-    placeHolder: "9D9D9D",
+    gold: '#FAEEB9',
+    border: '#232549',
+    background: "#3C3860",   
+    placeHolder: "9D9D9D", 
 };
 
 export default Colors;

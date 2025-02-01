@@ -1,15 +1,11 @@
-import PrimaryButton from "../components/ui/PrimaryButton";
 import GameBackground from "../components/ui/GameBackground";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
+import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 
 function StartGameScreen({ navigation }) {
     return (
         <GameBackground>
-            <View style={styles.buttonContainer}>
-                <PrimaryButton onPress={() => navigation.navigate("AddPlayersScreen")}>
-                    Start
-                </PrimaryButton>
-            </View>
+            <PrimaryButtonBottom onPress={() => navigation.navigate("AddPlayersScreen")} >Start</PrimaryButtonBottom>
         </GameBackground>
     );
 }

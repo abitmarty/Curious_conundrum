@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { View, Text, Pressable, StyleSheet, ImageBackground } from "react-native";
 import { SettingsContext } from "../../store/context/SettingsContext";
 import SettingsOptions from "./SettingsOptions";
+import FontSize from "../../constants/FontSize";
+import Colors from '../../constants/colors';
 
 function SettingsCard({ setting, options }) {
     const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
@@ -14,9 +16,13 @@ function SettingsCard({ setting, options }) {
                     style={styles.imageBackground}
                     resizeMode="cover"
                 >
-                <Text>Rounds:</Text>
-                <Text>The game stops after {settings.rounds} rounds</Text>
-                <SettingsOptions setting={setting} options={options}></SettingsOptions>
+                    <View style={styles.contentContainer}>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>Rounds:</Text>
+                            <Text style={styles.subtitle}>The game stops after {settings.rounds} rounds</Text>
+                        </View>
+                        <SettingsOptions setting={setting} options={options}></SettingsOptions>
+                    </View>
             </ImageBackground>
         </View>
     )
@@ -33,6 +39,18 @@ const styles = StyleSheet.create({
         aspectRatio: 415 / 183,
         width: '80%',
     },
+    contentContainer: {
+        flex: 1,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10
+    },
+    titleContainer: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     imageBackground: {
         flex: 1,
         width: '100%',
@@ -40,4 +58,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    title: {
+        color: '#fff',
+        fontSize: FontSize.big,
+        padding: 0,
+    },
+    subtitle: {
+        color: Colors.gold,
+        fontSize: FontSize.small,
+    }
 })
