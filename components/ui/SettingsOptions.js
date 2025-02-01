@@ -21,7 +21,7 @@ function SettingsOptions({ setting, options }){
                     android_ripple={{ color: Colors.primary600 }}
                     >
                         <ImageBackground
-                            source={settings.rounds === option
+                            source={settings[setting] === option
                                 ? require('../../assets/card/input_card.png')
                                 : require('../../assets/card/input_card_black.png')} // Replace with your actual image
                             style={styles.choiceBackground} // New style for image background

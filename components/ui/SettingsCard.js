@@ -5,7 +5,7 @@ import SettingsOptions from "./SettingsOptions";
 import FontSize from "../../constants/FontSize";
 import Colors from '../../constants/colors';
 
-function SettingsCard({ setting, options }) {
+function SettingsCard({ title, subtitle, setting, options }) {
     const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
     
 
@@ -18,8 +18,8 @@ function SettingsCard({ setting, options }) {
                 >
                     <View style={styles.contentContainer}>
                         <View style={styles.titleContainer}>
-                            <Text style={styles.title}>Rounds:</Text>
-                            <Text style={styles.subtitle}>The game stops after {settings.rounds} rounds</Text>
+                            <Text style={styles.title}>{title}</Text>
+                            <Text style={styles.subtitle}>{subtitle}</Text>
                         </View>
                         <SettingsOptions setting={setting} options={options}></SettingsOptions>
                     </View>

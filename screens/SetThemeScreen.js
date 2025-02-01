@@ -2,29 +2,26 @@ import React, { useContext } from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import { SettingsContext } from "../store/context/SettingsContext";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import GameBackground from "../components/ui/GameBackground";
+import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
+import SmallButton from "../components/ui/SmallButton";
+import SettingsCard from "../components/ui/SettingsCard";
 
 function SetThemeScreen({ navigation }){
     const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
 
     return (
-        <View>
-            <Text>Game mode: {settings.gameMode}</Text>
-            <View style={styles.choiceView}>
-                <Pressable style={settings.gameMode === "casual" ? styles. choiceActive : styles.choiceInactive}
-                onPress={() => updateSetting("gameMode", "casual")}>
-                    <Text>Casual</Text>
-                </Pressable>
-                <Pressable style={settings.gameMode === "edgy" ? styles. choiceActive : styles.choiceInactive}
-                onPress={() => updateSetting("gameMode", "edgy")}>
-                    <Text>Edgy</Text>
-                </Pressable>
-                <Pressable style={settings.gameMode === "overshare" ? styles. choiceActive : styles.choiceInactive}
-                onPress={() => updateSetting("gameMode", "overshare")}>
-                    <Text>Overshare</Text>
-                </Pressable>
+        <GameBackground>
+            <SmallButton onPress={() => navigation.navigate("SetRoundsScreen")}/>
+            <View style={styles.mainContainer}>
+                <SettingsCard
+                title={"Theme"}
+                subtitle={"Select type of conundrums"}
+                setting="gameMode"
+                options={["casual", "edgy", "overshare"]} />
             </View>
-            <PrimaryButton onPress={() => navigation.navigate("HowToPlayScreen")}>Continue</PrimaryButton>
-        </View>
+            <PrimaryButtonBottom onPress={() => navigation.navigate("HowToPlayScreen")}>Continue</PrimaryButtonBottom>
+        </GameBackground>
     )
 }
 
@@ -46,5 +43,9 @@ const styles = StyleSheet.create({
     choiceActive: {
         backgroundColor: "green",
         padding: 10
-    }
+    },
+    mainContainer: {
+        flex: 1,
+        alignItems: "center",
+      },
 })

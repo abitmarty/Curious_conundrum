@@ -30,7 +30,11 @@ function SetRoundsScreen({ navigation }) {
         <GameBackground>
             <SmallButton onPress={() => navigation.navigate("AddPlayersScreen")}/>
             <View style={styles.mainContainer}>
-                <SettingsCard setting="rounds" options={[5, 10, 15]}></SettingsCard>
+                <SettingsCard
+                title={"Rounds"}
+                subtitle={"The game stops when reached"}
+                setting="rounds"
+                options={[5, 10, 15]} />
             </View>
             <PrimaryButtonBottom onPress={() => navigation.navigate("SetThemeScreen")}>Continue</PrimaryButtonBottom>
         </GameBackground>
