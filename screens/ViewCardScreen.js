@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { GameContext } from "../store/context/GameContext";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useFocusEffect } from "@react-navigation/native"; // Import useFocusEffect
+import GameBackground from "../components/ui/GameBackground";
+import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 
 function ViewCardScreen({ navigation }) {
     const { players } = useContext(GameContext);
@@ -38,40 +40,50 @@ function ViewCardScreen({ navigation }) {
         }
     }
 
+    const buttonText =
+    phase === "viewingPhase"
+        ? currentPlayerIndex === players.length - 1
+            ? "Start countdown"
+            : "Next player"
+        : "Show statement";
+
     return (
-        <View>
-            <Text>Excluded: {excludedPlayerId}</Text>
-            <Text>View card screen</Text>
-            <Text>{currentPlayerIndex}</Text>
+        <GameBackground>
+            <View style={styles.mainContainer}>
+                <Text>Excluded: {excludedPlayerId}</Text>
+                <Text>View card screen</Text>
+                <Text>{currentPlayerIndex}</Text>
 
-            {phase === "actionPhase" && (
-            <View>
-                <Text>Give the phone to:</Text>
-                <Text>{currentPlayer.name}</Text>
-                <Text> </Text>
-
-                <PrimaryButton onPress={changePhase}>Show statement</PrimaryButton>
-            </View>
-            )}
-
-            {phase === "viewingPhase" && (
-            <View>
-                <Text>Read the statement:</Text>
-                <Text>{currentPlayer.name}</Text>
-                {currentPlayer.id === excludedPlayerId ? (
-                    <Text>You are the liar</Text>
-                ) : (
-                    <Text>Who is the prettiest?</Text>
+                {phase === "actionPhase" && (
+                <View>
+                    <Text>Give the phone to:</Text>
+                    <Text>{currentPlayer.name}</Text>
+                    <Text> </Text>
+                </View>
                 )}
 
-                <PrimaryButton onPress={changePhase}>
-                {currentPlayerIndex === players.length - 1 ? "Start countdown" : "Next player"}
-                </PrimaryButton>
+                {phase === "viewingPhase" && (
+                <View>
+                    <Text>Read the statement:</Text>
+                    <Text>{currentPlayer.name}</Text>
+                    {currentPlayer.id === excludedPlayerId ? (
+                        <Text>You are the liar</Text>
+                    ) : (
+                        <Text>Who is the prettiest?</Text>
+                    )}
+                </View>
+                )}
             </View>
-            )}
-            
-        </View>
+            <PrimaryButtonBottom onPress={changePhase}>{buttonText}</PrimaryButtonBottom>
+        </GameBackground>
     )
 }
 
 export default ViewCardScreen;
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        alignItems: "center",
+    },
+})

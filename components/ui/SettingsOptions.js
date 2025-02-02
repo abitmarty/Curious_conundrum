@@ -12,7 +12,7 @@ function SettingsOptions({ setting, options }){
     return (
         <View style={styles.optionContainer}>
             {options.map((option) => (
-                <View style={styles.choiseContainer}>
+                <View key={`option-${option}`} style={styles.choiseContainer}>
                     <Pressable
                     onPress={() => updateSetting(setting, option)}
                     style={({ pressed }) => 

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import { Pressable, Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { SettingsContext } from "../store/context/SettingsContext";
-import PrimaryButton from "../components/ui/PrimaryButton";
 import GameBackground from "../components/ui/GameBackground";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import SmallButton from "../components/ui/SmallButton";
