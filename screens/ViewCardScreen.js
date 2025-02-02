@@ -5,6 +5,8 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import { useFocusEffect } from "@react-navigation/native"; // Import useFocusEffect
 import GameBackground from "../components/ui/GameBackground";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
+import ViewCard from "../components/ui/ViewCard";
+import ViewStatement from "../components/ui/ViewStatement";
 
 function ViewCardScreen({ navigation }) {
     const { players } = useContext(GameContext);
@@ -50,26 +52,17 @@ function ViewCardScreen({ navigation }) {
     return (
         <GameBackground>
             <View style={styles.mainContainer}>
-                <Text>Excluded: {excludedPlayerId}</Text>
-                <Text>View card screen</Text>
-                <Text>{currentPlayerIndex}</Text>
-
                 {phase === "actionPhase" && (
-                <View>
-                    <Text>Give the phone to:</Text>
-                    <Text>{currentPlayer.name}</Text>
-                    <Text> </Text>
-                </View>
+                    <ViewCard currentPlayer={currentPlayer}>Give the phone to:</ViewCard>
                 )}
 
                 {phase === "viewingPhase" && (
-                <View>
-                    <Text>Read the statement:</Text>
-                    <Text>{currentPlayer.name}</Text>
+                <View style={styles.subContainer}>
+                    <ViewCard currentPlayer={currentPlayer}>Read the statement:</ViewCard>
                     {currentPlayer.id === excludedPlayerId ? (
-                        <Text>You are the liar</Text>
+                        <ViewStatement>You are the liar</ViewStatement>
                     ) : (
-                        <Text>Who is the prettiest?</Text>
+                        <ViewStatement>Who is the prettiest?</ViewStatement>
                     )}
                 </View>
                 )}
@@ -85,5 +78,10 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         alignItems: "center",
+        marginTop: 50
     },
+    subContainer: {
+        width: '100%',
+        alignItems: 'center',
+    }
 })
