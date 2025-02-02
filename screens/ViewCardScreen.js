@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useRef, useState, useContext, useEffect } from "react";
+import { Animated, View, Text, StyleSheet } from "react-native";
 import { GameContext } from "../store/context/GameContext";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useFocusEffect } from "@react-navigation/native"; // Import useFocusEffect
@@ -43,31 +43,46 @@ function ViewCardScreen({ navigation }) {
     }
 
     const buttonText =
-    phase === "viewingPhase"
-        ? currentPlayerIndex === players.length - 1
-            ? "Start countdown"
-            : "Next player"
-        : "Show statement";
+        phase === "viewingPhase"
+            ? currentPlayerIndex === players.length - 1
+                ? "Start countdown"
+                : "Next player"
+            : "Show statement";
+
+    const statementText = 
+        phase === "viewingPhase"
+            ? (currentPlayer.id === excludedPlayerId 
+                ? "You are the liar" 
+                : "Who is the prettiest?"
+                )
+            : "";
+    
+    const viewCardText =
+        phase === "actionPhase" 
+                ? "Give the phone to:"
+                : "Read the statement:";
+
+    const initialValue = 5;  // Define the initial value here
+
+    const translation = useRef(new Animated.Value(initialValue)).current;
+
+    const startAnimation = () => {
+        Animated.timing(translation, {
+            toValue: translation.__getValue() === initialValue ? 70 : initialValue,
+            duration: 200,
+            useNativeDriver: true,
+        }).start();
+    };
 
     return (
         <GameBackground>
             <View style={styles.mainContainer}>
-                {phase === "actionPhase" && (
-                    <ViewCard currentPlayer={currentPlayer}>Give the phone to:</ViewCard>
-                )}
-
-                {phase === "viewingPhase" && (
-                <View style={styles.subContainer}>
-                    <ViewCard currentPlayer={currentPlayer}>Read the statement:</ViewCard>
-                    {currentPlayer.id === excludedPlayerId ? (
-                        <ViewStatement>You are the liar</ViewStatement>
-                    ) : (
-                        <ViewStatement>Who is the prettiest?</ViewStatement>
-                    )}
-                </View>
-                )}
+                <ViewCard currentPlayer={currentPlayer}>{viewCardText}</ViewCard>
+                <Animated.View style={[styles.animated, { transform: [{ translateY: translation }] }]}>
+                    <ViewStatement>{statementText}</ViewStatement>
+                </Animated.View>
             </View>
-            <PrimaryButtonBottom onPress={changePhase}>{buttonText}</PrimaryButtonBottom>
+            <PrimaryButtonBottom onPress={() => {changePhase(); startAnimation();}}>{buttonText}</PrimaryButtonBottom>
         </GameBackground>
     )
 }
@@ -78,10 +93,13 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         alignItems: "center",
-        marginTop: 50
+        marginTop: 50,
     },
     subContainer: {
         width: '100%',
         alignItems: 'center',
+    },
+    animated: {
+        alignItems: 'center'
     }
 })

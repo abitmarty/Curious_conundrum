@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import Colors from "../../constants/colors";
 import FontSize from "../../constants/FontSize";
 
-function ViewStatement({ children }) {
+function ViewStatement({ children, style }) {
     return (
-        <View style={styles.mainContainer}>
+        <View style={[style, styles.mainContainer]}>
             <Text style={styles.statement}>{children}</Text>
             <ImageBackground
                 source={require('../../assets/background/bottom_card_dark_blocked.png')}
@@ -21,12 +21,10 @@ export default ViewStatement;
 const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: Colors.dark,
-        borderBottomLeftRadius: 28,
-        borderBottomRightRadius: 28,
+        borderRadius: 28,
         overflow: 'hidden',
         width: '80%',
         position: 'absolute',
-        marginTop: 70,
         zIndex: 1,
     },
     statement: {
