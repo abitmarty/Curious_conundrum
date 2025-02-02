@@ -24,14 +24,14 @@ export default function App() {
     <SettingsContextProvider>
       <GameContextProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator initialRouteName="HowToPlayScreen">
             <Stack.Screen name="Home" component={StartGameScreen} options={{ headerShown: false }} />
             <Stack.Screen name="AddPlayersScreen" component={AddPlayersScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SetRoundsScreen" component={SetRoundsScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SetThemeScreen" component={SetThemeScreen} options={{ headerShown: false }} />
             <Stack.Screen name="HowToPlayScreen" component={HowToPlayScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ViewCardScreen" component={ViewCardScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="CountDownScreen" component={CountDownScreen} />
+            <Stack.Screen name="CountDownScreen" component={CountDownScreen} options={{ headerShown: false }} />
             <Stack.Screen name="VoteScreen" component={VoteScreen} />
             <Stack.Screen name="VoteResults" component={VoteResults} />
             <Stack.Screen name="Scoreboard" component={ScoreBoard} />

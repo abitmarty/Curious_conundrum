@@ -2,14 +2,14 @@ import { View, Text, ImageBackground, StyleSheet } from "react-native";
 import Colors from "../../constants/colors";
 import FontSize from "../../constants/FontSize";
 
-function ViewCard({ children, currentPlayer }) {
+function ViewCard({ children, subtitle }) {
     return (
         <View style={styles.cardContainer}>
             <ImageBackground
             source={require('../../assets/card/input_card.png')}
             style={styles.imageBackground}>
                 <Text style={styles.title}>{children}</Text>
-                <Text style={styles.subtitle}>{currentPlayer.name}</Text>
+                <Text style={styles.subtitle}>{subtitle}</Text>
             </ImageBackground>
         </View>
     )

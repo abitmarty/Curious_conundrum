@@ -77,7 +77,7 @@ function ViewCardScreen({ navigation }) {
     return (
         <GameBackground>
             <View style={styles.mainContainer}>
-                <ViewCard currentPlayer={currentPlayer}>{viewCardText}</ViewCard>
+                <ViewCard subtitle={currentPlayer.name}>{viewCardText}</ViewCard>
                 <Animated.View style={[styles.animated, { transform: [{ translateY: translation }] }]}>
                     <ViewStatement>{statementText}</ViewStatement>
                 </Animated.View>
