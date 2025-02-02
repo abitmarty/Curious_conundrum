@@ -3,24 +3,27 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import GameBackground from "../components/ui/GameBackground";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import ViewCard from "../components/ui/ViewCard";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SmallButton from "../components/ui/SmallButton";
+import { useFocusEffect } from "@react-navigation/native"; // Import useFocusEffect
 
 function CountDownScreen({ navigation, route }) {
     const { excludedPlayerId } = route.params;
     const [countdown, setCountDown] = useState(5);
 
-    useEffect(() => {
-        if (countdown > 0){
-            const timer = setInterval(() => {
-                setCountDown((prev) => prev - 1);
-            }, 1000)
-
-            return () => clearInterval(timer);
-        } else {
-            navigation.navigate("VoteScreen", { excludedPlayerId: excludedPlayerId})
-        }
-    }, [countdown])
+    useFocusEffect(
+        React.useCallback(() => {
+            if (countdown > 0) {
+                const timer = setInterval(() => {
+                    setCountDown((prev) => prev - 1);
+                }, 1000);
+    
+                return () => clearInterval(timer); // Cleanup when leaving screen
+            } else {
+                navigation.navigate("VoteScreen", { excludedPlayerId });
+            }
+        }, [countdown])
+    );
 
     return (
         <GameBackground>

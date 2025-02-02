@@ -1,8 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import { Text, View } from "react-native";
 import { GameContext } from "../store/context/GameContext";
-import PrimaryButton from "../components/ui/PrimaryButton";
 import { useIsFocused } from "@react-navigation/native";
+import GameBackground from "../components/ui/GameBackground";
+import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
+import SmallButton from "../components/ui/SmallButton";
 
 function VoteResults({ navigation, route }){
     const { playerIdVotedOut, excludedPlayerId } = route.params || {};
@@ -31,17 +33,18 @@ function VoteResults({ navigation, route }){
   }, [isFocused]); // Re-run effect when `isFocused` changes
 
     return (
-        <View>
-            <Text>Results of voting</Text>
-            <Text>Voted out: {playerIdVotedOut}</Text>
-            <Text>Liar: {excludedPlayerId}</Text>
-            {playerIdVotedOut === excludedPlayerId ? (
-                <Text>{votedOutPlayer.name} was the liar!</Text>
-            ) : (
-                <Text>{votedOutPlayer.name} was not the liar...</Text>
-            )}
-            <PrimaryButton onPress={() => navigation.navigate("Scoreboard")}>Continue</PrimaryButton>
-            </View>
+      <GameBackground>
+        <SmallButton onPress={() => navigation.navigate("VoteScreen", { excludedPlayerId: excludedPlayerId})}/>
+        <Text>Results of voting</Text>
+        <Text>Voted out: {votedOutPlayer.name}</Text>
+        <Text>Liar: {excludedPlayer.name}</Text>
+        {playerIdVotedOut === excludedPlayerId ? (
+            <Text>{votedOutPlayer.name} was the liar!</Text>
+        ) : (
+            <Text>{votedOutPlayer.name} was not the liar...</Text>
+        )}
+        <PrimaryButtonBottom onPress={() => navigation.navigate("Scoreboard")}>Scoreboard</PrimaryButtonBottom>
+      </GameBackground>
     )
 }
 
