@@ -7,6 +7,7 @@ import GameBackground from "../components/ui/GameBackground";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import ViewCard from "../components/ui/ViewCard";
 import ViewStatement from "../components/ui/ViewStatement";
+import SmallButton from "../components/ui/SmallButton";
 
 function ViewCardScreen({ navigation }) {
     const { players } = useContext(GameContext);
@@ -76,6 +77,7 @@ function ViewCardScreen({ navigation }) {
 
     return (
         <GameBackground>
+            <SmallButton onPress={() => navigation.navigate("SetThemeScreen")}/>
             <View style={styles.mainContainer}>
                 <ViewCard subtitle={currentPlayer.name}>{viewCardText}</ViewCard>
                 <Animated.View style={[styles.animated, { transform: [{ translateY: translation }] }]}>

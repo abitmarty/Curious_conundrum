@@ -4,6 +4,7 @@ import GameBackground from "../components/ui/GameBackground";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import ViewCard from "../components/ui/ViewCard";
 import { useState, useEffect } from "react";
+import SmallButton from "../components/ui/SmallButton";
 
 function CountDownScreen({ navigation, route }) {
     const { excludedPlayerId } = route.params;
@@ -23,8 +24,9 @@ function CountDownScreen({ navigation, route }) {
 
     return (
         <GameBackground>
+            <SmallButton onPress={() => navigation.navigate("ViewCardScreen")}/>
             <View style={styles.mainContainer}>
-                <ViewCard subtitle={countdown.toString()}>Hello</ViewCard>
+                <ViewCard subtitle={countdown.toString()}>Countdown and point!</ViewCard>
             </View>
             <PrimaryButtonBottom onPress={() => navigation.navigate("VoteScreen", { excludedPlayerId: excludedPlayerId})}>Continue</PrimaryButtonBottom>
         </GameBackground>

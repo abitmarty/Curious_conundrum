@@ -2,69 +2,73 @@ import React, { useContext, useState } from "react";
 import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import { GameContext } from "../store/context/GameContext";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import GameBackground from "../components/ui/GameBackground";
+import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
+import TitleCard from "../components/ui/TitleCard";
+import SmallButton from "../components/ui/SmallButton";
+import PlayerCardPressable from "../components/ui/PlayerCardPressable";
 
 function VoteScreen({ navigation, route }){
     const { players } = useContext(GameContext);
     const [selectedPlayer, setSelectedPlayer] = useState(null);
     const { excludedPlayerId } = route.params;
 
-    const renderItem = ({ item }) => (
-        <Pressable 
-        style={[
-            styles.playerItem, 
-            selectedPlayer === item.id && styles.selectedPlayer
-        ]}
-            onPress={() => setSelectedPlayer(item.id)}
-        >
-            <Text>{item.name}</Text>
-        </Pressable>
-    );
+    const renderItem = ({ item }) => {
+        return (
+            <View style={styles.cardContainer}>
+                <PlayerCardPressable selectedPlayer={selectedPlayer} item={item} onPress={() => setSelectedPlayer(item.id)}>
+                    {item.name}
+                </PlayerCardPressable>
+            </View>
+        );
+    };
 
     return (
-        <View>
-            <Text>Vote the liar out</Text>
-            <Text>Selected: {selectedPlayer}</Text>
-            <Text>Excluded: {excludedPlayerId}</Text>
-            <FlatList
-                data={players}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
-                numColumns={2}  // Display two items per row
-                columnWrapperStyle={styles.row}  // Add some space between columns
-            />
-            <PrimaryButton onPress={() => navigation.navigate("VoteResults", { playerIdVotedOut: selectedPlayer, excludedPlayerId: excludedPlayerId})}>Vote out!</PrimaryButton>
-        </View>
+        <GameBackground>
+            <SmallButton onPress={() => navigation.navigate("CountDownScreen", { excludedPlayerId: excludedPlayerId})}/>
+            <View style={styles.mainContainer}>
+                <TitleCard>Vote the liar out!</TitleCard>
+                <FlatList
+                    data={players}
+                    numColumns={2}
+                    keyExtractor={(item) => item.id.toString()}
+                    style={styles.flat}
+                    renderItem={renderItem}
+                    contentContainerStyle={styles.flatListContent}
+                    columnWrapperStyle={styles.row}
+                />
+            </View>
+            <PrimaryButtonBottom onPress={() => navigation.navigate("VoteResults", { playerIdVotedOut: selectedPlayer, excludedPlayerId: excludedPlayerId})}>Vote out!</PrimaryButtonBottom>
+        </GameBackground>
     )
 }
 
 export default VoteScreen;
 
-
 const styles = StyleSheet.create({
-    container: {
+    mainContainer:{
         flex: 1,
-        justifyContent: "center",
+        justifyContent: 'center',
         alignItems: "center",
-        padding: 20,
-    },
-    header: {
-        fontSize: 24,
-        fontWeight: "bold",
-        marginBottom: 20,
-    },
-    playerItem: {
-        flex: 1,
-        margin: 10,
-        padding: 10,
-        backgroundColor: "#e0e0e0",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 5,
     },
     row: {
-        justifyContent: "space-around", // Spread out columns evenly
+        width: '50%',
+        alignItems: 'flex-start',
+        paddingVertical: 20,
     },
     selectedPlayer: {
         backgroundColor: "#4CAF50", // Highlight selected player with a different color
+    },
+    flat: {
+        width: '100%',
+    },
+    cardContainer: {
+        width: '100%',
+        alignItems: "center",
+        justifyContent: 'center',
+    },
+    flatListContent: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });

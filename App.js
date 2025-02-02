@@ -32,7 +32,7 @@ export default function App() {
             <Stack.Screen name="HowToPlayScreen" component={HowToPlayScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ViewCardScreen" component={ViewCardScreen} options={{ headerShown: false }} />
             <Stack.Screen name="CountDownScreen" component={CountDownScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="VoteScreen" component={VoteScreen} />
+            <Stack.Screen name="VoteScreen" component={VoteScreen} options={{ headerShown: false }} />
             <Stack.Screen name="VoteResults" component={VoteResults} />
             <Stack.Screen name="Scoreboard" component={ScoreBoard} />
           </Stack.Navigator>

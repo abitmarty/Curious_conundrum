@@ -6,9 +6,6 @@ import FontSize from "../../constants/FontSize";
 import Colors from '../../constants/colors';
 
 function SettingsCard({ title, subtitle, setting, options }) {
-    const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
-    
-
     return (
         <View style={styles.choiceView}>
             <ImageBackground
