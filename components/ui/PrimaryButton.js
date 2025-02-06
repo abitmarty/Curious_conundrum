@@ -9,6 +9,8 @@ function PrimaryButton({ children, onPress, typeBtn="continue", style }) {
         backgroundSource = require('../../assets/button/button_add.png')
     } else if (typeBtn === "remove") {
         backgroundSource = require('../../assets/button/button_remove.png')
+    } else if (typeBtn === "red"){
+        backgroundSource = require('../../assets/button/button_continue_red.png')
     } else {
         backgroundSource = require('../../assets/button/button_continue.png')
     }

@@ -41,7 +41,11 @@ function VoteResults({ navigation, route }){
         <View style={styles.centeredView}>
           <Result correctVoting={correctVoting} votedOutPlayer={votedOutPlayer} excludedPlayer={excludedPlayer} />
         </View>
-      <PrimaryButtonBottom onPress={() => navigation.navigate("Scoreboard")}>Scoreboard</PrimaryButtonBottom>
+        {correctVoting ? 
+          <PrimaryButtonBottom typeBtn={"red"} onPress={() => navigation.navigate("Scoreboard")}>Scoreboard</PrimaryButtonBottom>
+          :
+          <PrimaryButtonBottom onPress={() => navigation.navigate("Scoreboad")}>Scoreboard</PrimaryButtonBottom>
+        }
     </GameBackground>
   )
 }

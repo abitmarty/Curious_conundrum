@@ -1,10 +1,10 @@
 import { StyleSheet, View } from "react-native";
 import PrimaryButton from "./PrimaryButton";
 
-function PrimaryButtonBottom({ children, onPress }) {
+function PrimaryButtonBottom({ children, onPress, typeBtn }) {
     return (
         <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={onPress}>
+            <PrimaryButton typeBtn={typeBtn} onPress={onPress}>
                 {children}
             </PrimaryButton>
         </View>
