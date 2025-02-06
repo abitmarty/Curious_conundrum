@@ -1,19 +1,20 @@
 import React, { useEffect, useContext } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { GameContext } from "../store/context/GameContext";
 import { useIsFocused } from "@react-navigation/native";
 import GameBackground from "../components/ui/GameBackground";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import SmallButton from "../components/ui/SmallButton";
+import Result from "../components/ui/Result";
 
 function VoteResults({ navigation, route }){
-    const { playerIdVotedOut, excludedPlayerId } = route.params || {};
-    const { players, changeScore } = useContext(GameContext);
+  const { playerIdVotedOut, excludedPlayerId } = route.params || {};
+  const { players, changeScore } = useContext(GameContext);
 
-    const isFocused = useIsFocused(); // Hook to track if the screen is currently visible
+  const isFocused = useIsFocused(); // Hook to track if the screen is currently visible
 
-    const votedOutPlayer  = players.find(player => player.id === playerIdVotedOut);
-    const excludedPlayer = players.find(player => player.id === excludedPlayerId);
+  const votedOutPlayer  = players.find(player => player.id === playerIdVotedOut);
+  const excludedPlayer = players.find(player => player.id === excludedPlayerId);
 
     // Update scores whenever the screen is opened
   useEffect(() => {
@@ -32,20 +33,29 @@ function VoteResults({ navigation, route }){
     }
   }, [isFocused]); // Re-run effect when `isFocused` changes
 
-    return (
-      <GameBackground>
-        <SmallButton onPress={() => navigation.navigate("VoteScreen", { excludedPlayerId: excludedPlayerId})}/>
-        <Text>Results of voting</Text>
-        <Text>Voted out: {votedOutPlayer.name}</Text>
-        <Text>Liar: {excludedPlayer.name}</Text>
-        {playerIdVotedOut === excludedPlayerId ? (
-            <Text>{votedOutPlayer.name} was the liar!</Text>
-        ) : (
-            <Text>{votedOutPlayer.name} was not the liar...</Text>
-        )}
-        <PrimaryButtonBottom onPress={() => navigation.navigate("Scoreboard")}>Scoreboard</PrimaryButtonBottom>
-      </GameBackground>
-    )
+  const correctVoting = playerIdVotedOut === excludedPlayerId;
+
+  return (
+    <GameBackground correctVoting={correctVoting}>
+      <SmallButton onPress={() => navigation.navigate("VoteScreen", { excludedPlayerId: excludedPlayerId})}/>
+        <View style={styles.centeredView}>
+          <Result correctVoting={correctVoting} votedOutPlayer={votedOutPlayer} excludedPlayer={excludedPlayer} />
+        </View>
+      <PrimaryButtonBottom onPress={() => navigation.navigate("Scoreboard")}>Scoreboard</PrimaryButtonBottom>
+    </GameBackground>
+  )
 }
 
 export default VoteResults;
+
+const styles = StyleSheet.create({
+  centeredView: {
+    position: 'absolute',
+    justifyContent: "center",
+    alignItems: "center",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,    
+  }
+})
