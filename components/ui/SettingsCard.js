@@ -4,6 +4,7 @@ import { SettingsContext } from "../../store/context/SettingsContext";
 import SettingsOptions from "./SettingsOptions";
 import FontSize from "../../constants/FontSize";
 import Colors from '../../constants/colors';
+import TextCustom from "./TextCustom";
 
 function SettingsCard({ title, subtitle, setting, options }) {
     return (
@@ -15,8 +16,8 @@ function SettingsCard({ title, subtitle, setting, options }) {
                 >
                     <View style={styles.contentContainer}>
                         <View style={styles.titleContainer}>
-                            <Text style={styles.title}>{title}</Text>
-                            <Text style={styles.subtitle}>{subtitle}</Text>
+                            <TextCustom style={styles.title}>{title}</TextCustom>
+                            <TextCustom style={styles.subtitle}>{subtitle}</TextCustom>
                         </View>
                         <SettingsOptions setting={setting} options={options}></SettingsOptions>
                     </View>

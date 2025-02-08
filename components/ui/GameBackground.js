@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     safeAreaContainer: {
         flex: 1,
         paddingTop: 20, // Adjust for top bar padding if needed
-        paddingHorizontal: 10,
     },
     backgroundTop: {
         width: '100%',

@@ -1,6 +1,7 @@
 import { View, Text, ImageBackground, StyleSheet } from "react-native";
 import Colors from "../../constants/colors";
 import FontSize from "../../constants/FontSize";
+import TextCustom from "./TextCustom";
 
 function ViewCard({ children, subtitle }) {
     return (
@@ -8,8 +9,8 @@ function ViewCard({ children, subtitle }) {
             <ImageBackground
             source={require('../../assets/card/input_card.png')}
             style={styles.imageBackground}>
-                <Text style={styles.title}>{children}</Text>
-                <Text style={styles.subtitle}>{subtitle}</Text>
+                <TextCustom style={styles.title}>{children}</TextCustom>
+                <TextCustom style={styles.subtitle}>{subtitle}</TextCustom>
             </ImageBackground>
         </View>
     )

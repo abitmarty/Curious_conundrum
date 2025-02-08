@@ -44,7 +44,7 @@ function VoteResults({ navigation, route }){
         {correctVoting ? 
           <PrimaryButtonBottom typeBtn={"red"} onPress={() => navigation.navigate("Scoreboard")}>Scoreboard</PrimaryButtonBottom>
           :
-          <PrimaryButtonBottom onPress={() => navigation.navigate("Scoreboad")}>Scoreboard</PrimaryButtonBottom>
+          <PrimaryButtonBottom onPress={() => navigation.navigate("Scoreboard")}>Scoreboard</PrimaryButtonBottom>
         }
     </GameBackground>
   )

@@ -1,5 +1,7 @@
 import { Text, View, ImageBackground, StyleSheet, Pressable } from "react-native";
 import Colors from "../../constants/colors";
+import TextCustom from "./TextCustom";
+import FontSize from "../../constants/FontSize";
 
 function PlayerCardPressable({ children, onPress, selectedPlayer, item }) {
     return(
@@ -18,7 +20,7 @@ function PlayerCardPressable({ children, onPress, selectedPlayer, item }) {
                     style={styles.imageBackground}
                     resizeMode="cover"
                 >
-                    <Text style={styles.text}>{children}</Text>
+                    <TextCustom style={styles.text}>{children}</TextCustom>
 
                 </ImageBackground>
             </Pressable>
@@ -40,7 +42,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        color: '#fff'
+        color: '#fff',
+        fontSize: FontSize.small
     },
     closeBtnContainer: {
         position: 'absolute',

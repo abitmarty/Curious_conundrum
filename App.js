@@ -34,7 +34,7 @@ export default function App() {
             <Stack.Screen name="CountDownScreen" component={CountDownScreen} options={{ headerShown: false }} />
             <Stack.Screen name="VoteScreen" component={VoteScreen} options={{ headerShown: false }} />
             <Stack.Screen name="VoteResults" component={VoteResults} options={{ headerShown: false }} />
-            <Stack.Screen name="Scoreboard" component={ScoreBoard} />
+            <Stack.Screen name="Scoreboard" component={ScoreBoard} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
       </GameContextProvider>

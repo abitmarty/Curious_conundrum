@@ -1,18 +1,31 @@
 import { Text, View, ImageBackground, StyleSheet } from "react-native";
 import PrimaryButton from "./PrimaryButton";
+import FontSize from "../../constants/FontSize";
+import TextCustom from "./TextCustom";
 
-function PlayerCard({ children, onPress }) {
+function PlayerCard({ children, onPress, style, cardColor }) {
+    let background;
+    if (cardColor === 'green') {
+        background = require('../../assets/card/player_card_green.png')
+    } else if (cardColor === 'red') {
+        background = require('../../assets/card/player_card_red.png')
+    } else {
+        background = require('../../assets/card/player_card.png')
+    } 
+
     return(
-        <View style={styles.cardContainer}>
+        <View style={[styles.cardContainer, style]}>
             <ImageBackground
-                source={require('../../assets/card/player_card.png')}
+                source={background}
                 style={styles.imageBackground}
                 resizeMode="cover"
             >
-                <Text style={styles.text}>{children}</Text>
-                <View style={styles.closeBtnContainer}>
-                    <PrimaryButton style={{height: 30, borderRadius: 10}} typeBtn="remove" onPress={onPress} />
-                </View>
+                <TextCustom style={styles.text}>{children}</TextCustom>
+                {onPress && (
+                    <View style={styles.closeBtnContainer}>
+                        <PrimaryButton style={{height: 30, borderRadius: 10}} typeBtn="remove" onPress={onPress} />
+                    </View>
+                )}
             </ImageBackground>
         </View>
     )
@@ -34,7 +47,8 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     text: {
-        color: '#fff'
+        color: '#fff',
+        fontSize: FontSize.small,
     },
     closeBtnContainer: {
         position: 'absolute',

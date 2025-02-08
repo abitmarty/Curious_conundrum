@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import Colors from "../../constants/colors";
 import FontSize from "../../constants/FontSize";
+import TextCustom from "./TextCustom";
 
 function ViewStatement({ children, style }) {
     return (
         <View style={[style, styles.mainContainer]}>
-            <Text style={styles.statement}>{children}</Text>
+            <TextCustom style={styles.statement}>{children}</TextCustom>
             <ImageBackground
                 source={require('../../assets/background/bottom_card_dark_blocked.png')}
                 style={styles.backgroundBottom}

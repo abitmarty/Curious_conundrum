@@ -1,6 +1,7 @@
 import { View, Text, ImageBackground, StyleSheet } from "react-native";
 import FontSize from "../../constants/FontSize";
 import Colors from '../../constants/colors';
+import TextCustom from "./TextCustom";
 
 function ResultCard({ votedOutPlayer, excludedPlayer, correctVoting, style }) {
 
@@ -14,8 +15,8 @@ function ResultCard({ votedOutPlayer, excludedPlayer, correctVoting, style }) {
                 style={styles.imageBackground}
                 resizeMode="cover"
             >
-                <Text style={styles.title}>{votedOutPlayer.name}</Text>
-                <Text style={styles.subTitle}>{subTitle}</Text>
+                <TextCustom style={styles.title}>{votedOutPlayer.name}</TextCustom>
+                <TextCustom style={styles.subTitle}>{subTitle}</TextCustom>
             </ImageBackground>
         </View>
     )

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TextInput, StyleSheet, ImageBackground } from "react-native";
 import Colors from '../../constants/colors';
 import FontSize from "../../constants/FontSize";
+import TextCustom from "./TextCustom";
 
 function InputCard({ title, value, onChangeText, placeholder, onSubmitEditing }) {
     return (
@@ -12,7 +13,7 @@ function InputCard({ title, value, onChangeText, placeholder, onSubmitEditing })
                 resizeMode="cover"
             >
                 <View style={styles.cardContent}>
-                    <Text style={styles.title}>{title}</Text>
+                    <TextCustom style={styles.title}>{title}</TextCustom>
                     <TextInput
                         style={styles.input}
                         placeholder={placeholder}

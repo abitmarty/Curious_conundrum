@@ -8,6 +8,7 @@ const Colors = {
     red: "#DB86A5",
     dark: '#3D435B',
     gold: '#FAEEB9',
+    silver: '#DDDDDD',
     border: '#232549',
     background: "#3C3860",   
     placeHolder: "9D9D9D", 

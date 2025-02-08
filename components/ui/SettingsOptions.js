@@ -4,6 +4,7 @@ import { GameContext } from "../../store/context/GameContext";
 import { SettingsContext } from "../../store/context/SettingsContext";
 import FontSize from "../../constants/FontSize";
 import Colors from '../../constants/colors';
+import TextCustom from "./TextCustom";
 
 function SettingsOptions({ setting, options }){
     const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
@@ -27,9 +28,9 @@ function SettingsOptions({ setting, options }){
                             style={styles.choiceBackground} // New style for image background
                             resizeMode="cover"
                         >
-                            <Text style={styles.choiceText}>
+                            <TextCustom style={styles.choiceText}>
                                 {option}
-                            </Text>
+                            </TextCustom>
                         </ImageBackground>
                     </Pressable>
                 </View>

@@ -1,6 +1,7 @@
 import { View, Text, Pressable, StyleSheet, ImageBackground } from 'react-native';
 import Colors from '../../constants/colors';
 import FontSize from '../../constants/FontSize';
+import TextCustom from './TextCustom';
 
 function PrimaryButton({ children, onPress, typeBtn="continue", style }) {
     let backgroundSource;
@@ -36,9 +37,9 @@ function PrimaryButton({ children, onPress, typeBtn="continue", style }) {
                     style={styles.imageBackground}
                     resizeMode="cover"
                 >
-                    <Text style={styles.buttonText}>
+                    <TextCustom style={styles.buttonText}>
                         {children}
-                    </Text>
+                    </TextCustom>
                 </ImageBackground>
             </Pressable>
         </View>
@@ -79,7 +80,6 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: FontSize.big,
-        fontWeight: 'bold',
     },
     pressed: {
         opacity: 0.75,

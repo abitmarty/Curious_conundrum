@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import FontSize from "../../constants/FontSize";
+import TextCustom from "./TextCustom";
 
 function TitleCard({ children }){
     return (
@@ -8,7 +9,7 @@ function TitleCard({ children }){
             source={require('../../assets/card/title_card.png')}
             style={styles.imageBackgound}
             >
-                <Text style={styles.title}>{children}</Text>
+                <TextCustom style={styles.title}>{children}</TextCustom>
             </ImageBackground>
         </View>
     )
@@ -30,6 +31,6 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#fff',
-        fontSize: FontSize.mid
+        fontSize: FontSize.big
     }
 })

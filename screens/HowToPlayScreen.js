@@ -2,13 +2,16 @@ import { Text, View, StyleSheet } from "react-native";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import GameBackground from "../components/ui/GameBackground";
 import SmallButton from "../components/ui/SmallButton";
+import TextCustom from "../components/ui/TextCustom";
+
 
 function HowToPlayScreen({ navigation }){
+
     return (
         <GameBackground>
             <SmallButton onPress={() => navigation.navigate("SetRoundsScreen")}/>
             <View style={styles.mainContainer}>
-                <Text>How to play Curious Conundrum</Text>
+                <TextCustom>How to play Curious Conundrum</TextCustom>
             </View>
             <PrimaryButtonBottom onPress={() => navigation.navigate("ViewCardScreen")}>Start game</PrimaryButtonBottom>
         </GameBackground>
@@ -22,4 +25,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
     },
+    backgdsf: {
+        backgroundColor: 'red'
+    }
 })
