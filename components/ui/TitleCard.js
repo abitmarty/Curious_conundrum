@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         aspectRatio: 415 / 106,
         width: '80%',
+        zIndex: 1
     },
     imageBackgound: {
         flex: 1,

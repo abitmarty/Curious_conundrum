@@ -3,5 +3,4 @@ export const overshare = [
     "Who is most likely to drink and drive?",
     "Who would only help someone if it's recorded?", 
     "Who in the group is most likely to betray you?",
-
 ]
