@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
-        fontSize: FontSize.small
+        fontSize: FontSize.mid
     },
     closeBtnContainer: {
         position: 'absolute',

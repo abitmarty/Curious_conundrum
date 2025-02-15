@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         color: Colors.gold,
-        fontSize: FontSize.small,
+        fontSize: FontSize.mid,
     }
 })

@@ -27,7 +27,7 @@ function CountDownScreen({ navigation, route }) {
 
     return (
         <GameBackground>
-            <SmallButton onPress={() => navigation.navigate("ViewCardScreen")}/>
+            <SmallButton onPress={() => navigation.popTo('Home')}/>
             <View style={styles.mainContainer}>
                 <ViewCard subtitle={countdown.toString()}>Countdown and point!</ViewCard>
             </View>

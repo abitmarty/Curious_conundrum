@@ -51,9 +51,9 @@ function GameContextProvider({ children }) {
 
   // Function to remove a player by UUID
   function removePlayer(playerId) {
-    setPlayers((currentPlayers) =>
-      currentPlayers.filter((player) => player.id !== playerId)
-    );
+    setPlayers((currentPlayers) => {
+      return currentPlayers.filter((player) => player.id !== playerId);
+    });
   }
 
   // Function to change score of player

@@ -37,7 +37,7 @@ function VoteResults({ navigation, route }){
 
   return (
     <GameBackground correctVoting={correctVoting}>
-      <SmallButton onPress={() => navigation.navigate("VoteScreen", { excludedPlayerId: excludedPlayerId})}/>
+      <SmallButton onPress={() => navigation.popTo('Home')}/>
         <View style={styles.centeredView}>
           <Result correctVoting={correctVoting} votedOutPlayer={votedOutPlayer} excludedPlayer={excludedPlayer} />
         </View>

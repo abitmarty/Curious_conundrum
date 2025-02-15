@@ -9,7 +9,7 @@ const FontSize = {
        ultra: 24,
        big: 22,
        mid: 20,
-       small: 20,
+       small: 18,
 };
 
 

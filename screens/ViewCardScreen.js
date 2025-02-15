@@ -8,10 +8,12 @@ import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import ViewCard from "../components/ui/ViewCard";
 import ViewStatement from "../components/ui/ViewStatement";
 import SmallButton from "../components/ui/SmallButton";
+import { casual } from "../conundrums/casual";
 
 function ViewCardScreen({ navigation }) {
     const { players } = useContext(GameContext);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+    const [currentStatement, setCurrentStatement] = useState("");
     const [phase, setPhase] = useState("actionPhase");  // "viewingPhase" or "actionPhase"
     const [excludedPlayerId, setExcludedPlayerId] = useState(null); // Track the excluded player
     const currentPlayer = players[currentPlayerIndex];
@@ -19,8 +21,14 @@ function ViewCardScreen({ navigation }) {
     // Randomly select an excluded player on initial render
     useFocusEffect(
         React.useCallback(() => {
-            const randomIndex = Math.floor(Math.random() * players.length);
-            setExcludedPlayerId(players[randomIndex].id);
+            if(players?.length > 0){
+                const randomIndex = Math.floor(Math.random() * players.length);
+                setExcludedPlayerId(players[randomIndex].id);
+            }
+            if(casual?.length > 0){
+                const randomStatement = casual[Math.floor(Math.random() * casual.length)];
+                setCurrentStatement(randomStatement);
+            }
         }, [players])
     );
 
@@ -54,7 +62,7 @@ function ViewCardScreen({ navigation }) {
         phase === "viewingPhase"
             ? (currentPlayer.id === excludedPlayerId 
                 ? "You are the liar" 
-                : "Who is the prettiest?"
+                : currentStatement
                 )
             : "";
     
@@ -75,9 +83,13 @@ function ViewCardScreen({ navigation }) {
         }).start();
     };
 
+    if (!players || players.length === 0 || !currentPlayer) {
+        return null;
+    }
+
     return (
         <GameBackground>
-            <SmallButton onPress={() => navigation.navigate("SetThemeScreen")}/>
+            <SmallButton onPress={() => navigation.popTo('Home')}/>
             <View style={styles.mainContainer}>
                 <ViewCard subtitle={currentPlayer.name}>{viewCardText}</ViewCard>
                 <Animated.View style={[styles.animated, { transform: [{ translateY: translation }] }]}>

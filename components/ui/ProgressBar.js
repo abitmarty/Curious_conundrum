@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         left: 0
     },
     rounds: {
-        fontSize: FontSize.small,
+        fontSize: FontSize.mid,
         color: Colors.gold,
     },
 })

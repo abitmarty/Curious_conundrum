@@ -7,6 +7,7 @@ import SmallButton from "../components/ui/SmallButton";
 import InputCard from "../components/ui/InputCard";
 import Colors from '../constants/colors';
 import PlayerCard from "../components/ui/PlayerCard";
+import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
 
 function AddPlayersScreen({ navigation }) {
   const [playerName, setPlayerName] = useState("");
@@ -21,15 +22,23 @@ function AddPlayersScreen({ navigation }) {
 
   const removePlayerHandler = (playerId) => {
     removePlayer(playerId)
+    // console.log(playerId)
+    // console.log(players)
   }
 
   useEffect(() => {
     inputRef.current?.focus(); // Focus the input field
   }, []);
 
+  // You need at least 3 players to play the game
+  let functionCall;
+  if (players.length >= 3) {
+      functionCall = () => { addPlayerHandler(); navigation.navigate("SetRoundsScreen")};
+  }
+
   return (
     <GameBackground>
-        <SmallButton onPress={() => navigation.navigate("Home")}/>
+        <SmallButton onPress={() => navigation.popTo('Home')}/>
         <View style={styles.mainContainer}>
           <InputCard
             title="Add Players:"
@@ -53,7 +62,7 @@ function AddPlayersScreen({ navigation }) {
           />
         </View>
       <View style={styles.footer}>
-        <PrimaryButton onPress={() => { addPlayerHandler(); navigation.navigate("SetRoundsScreen")}}>Continue</PrimaryButton>
+        <PrimaryButton onPress={functionCall}>Continue</PrimaryButton>
         <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
       </View>
     </GameBackground>

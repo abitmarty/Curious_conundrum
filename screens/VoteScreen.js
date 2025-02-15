@@ -23,9 +23,15 @@ function VoteScreen({ navigation, route }){
         );
     };
 
+
+    let functionCall;
+    if (selectedPlayer) {
+        functionCall = () => navigation.navigate("VoteResults", { playerIdVotedOut: selectedPlayer, excludedPlayerId: excludedPlayerId});
+    }
+
     return (
         <GameBackground>
-            <SmallButton onPress={() => navigation.navigate("CountDownScreen", { excludedPlayerId: excludedPlayerId})}/>
+            <SmallButton onPress={() => navigation.popTo('Home')}/>
             <View style={styles.mainContainer}>
                 <TitleCard>Vote the liar out!</TitleCard>
                 <FlatList
@@ -38,7 +44,7 @@ function VoteScreen({ navigation, route }){
                     columnWrapperStyle={styles.row}
                 />
             </View>
-            <PrimaryButtonBottom onPress={() => navigation.navigate("VoteResults", { playerIdVotedOut: selectedPlayer, excludedPlayerId: excludedPlayerId})}>Vote out!</PrimaryButtonBottom>
+            <PrimaryButtonBottom onPress={functionCall}>Vote out!</PrimaryButtonBottom>
         </GameBackground>
     )
 }

@@ -82,7 +82,7 @@ function ScoreBoard({ navigation }){
 
     return (
         <GameBackground>
-            <SmallButton onPress={() => {}}/>
+            <SmallButton onPress={() => navigation.popTo('Home')}/>
             <View style={styles.mainContainer}>
                 <TitleCard>Scoreboard</TitleCard>
                 <FlatList
@@ -93,7 +93,7 @@ function ScoreBoard({ navigation }){
                 />
             </View>
             {settings.roundsPlayed >= settings.rounds ? (
-                <PrimaryButtonBottom onPress={() => navigation.navigate("Home")}>Start new game</PrimaryButtonBottom>
+                <PrimaryButtonBottom onPress={() => navigation.popTo('Home')}>Start new game</PrimaryButtonBottom>
             ) : (
                 <PrimaryButtonBottom onPress={() => navigation.navigate("ViewCardScreen")}>Continue</PrimaryButtonBottom>
             )}
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     positionText: {
-        fontSize: FontSize.small,
+        fontSize: FontSize.mid,
         color: '#fff',
     },
     positionSecond: {
