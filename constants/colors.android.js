@@ -10,7 +10,7 @@ const Colors = {
     silver: '#DDDDDD',
     border: '#232549',
     background: "#3C3860",   
-    placeHolder: "9D9D9D", 
+    placeHolder: "#9D9D9D", 
 };
 
 export default Colors;
