@@ -2,6 +2,7 @@ import { View, Text, ImageBackground, StyleSheet } from "react-native";
 import Colors from "../../constants/colors";
 import FontSize from "../../constants/FontSize";
 import TextCustom from "./TextCustom";
+import Shadow from "./Shadow";
 
 function ViewCard({ children, subtitle }) {
     return (
@@ -22,7 +23,6 @@ const styles = StyleSheet.create({
     cardContainer: {
         borderRadius: 28,
         margin: 4,
-        overflow: 'hidden',
         aspectRatio: 425 / 161,
         width: '80%',
         position: 'absolute',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#fff',
-        fontSize: FontSize.mid,
+        fontSize: FontSize.big,
     },
     subtitle: {
         color: Colors.gold,

@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: "center",
+      gap: 20,
     },
     flat: {
       width: '100%',
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
       bottom: 0,
       left: 0,
       right: 0,
+      gap: 14,
     },
     title: {
       fontSize: 20,

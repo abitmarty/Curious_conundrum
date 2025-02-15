@@ -118,16 +118,16 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: "center",
-        paddingVertical: 5,
+        paddingVertical: 10,
         gap: 10,
     },
     topPlayerContainer: {
         backgroundColor: Colors.green,
-        paddingVertical: 10,
-        marginBottom: 15,
+        paddingVertical: 15,
+        marginBottom: 10,
     },
     bottomPlayerContainer: {
-        marginTop: 15,
+        marginTop: 10,
     },
     score: {
         color: '#fff',

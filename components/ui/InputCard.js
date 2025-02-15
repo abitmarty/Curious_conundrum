@@ -3,10 +3,12 @@ import { View, Text, TextInput, StyleSheet, ImageBackground } from "react-native
 import Colors from '../../constants/colors';
 import FontSize from "../../constants/FontSize";
 import TextCustom from "./TextCustom";
+import Shadow from "./Shadow";
 
 function InputCard({ title, value, onChangeText, placeholder, onSubmitEditing }) {
     return (
         <View style={styles.cardContainer}>
+            <Shadow/>
             <ImageBackground
                 source={require('../../assets/card/input_card.png')} // Replace with your image path
                 style={styles.imageBackground}
@@ -18,7 +20,7 @@ function InputCard({ title, value, onChangeText, placeholder, onSubmitEditing })
                         style={styles.input}
                         placeholder={placeholder}
                         value={value}
-                        onChangeText={onChangeText}
+                        onChangeText={((text) => onChangeText(text.slice(0, 12)))}
                         placeholderTextColor={Colors.placeholder}
                         onSubmitEditing={onSubmitEditing}
                         blurOnSubmit={false}
@@ -35,8 +37,6 @@ export default InputCard;
 const styles = StyleSheet.create({
     cardContainer: {
         borderRadius: 28,
-        margin: 4,
-        overflow: 'hidden',
         aspectRatio: 425 / 161,
         width: '80%',
     },
@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
         padding: 15,
         justifyContent: "center",
         width: '70%',
+        gap: 5,
     },
     title: {
         color: 'white',
         textAlign: 'center',
-        fontSize: FontSize.mid,
-        marginBottom: 10,
+        fontSize: FontSize.big,
     },
     input: {
         width: '100%',

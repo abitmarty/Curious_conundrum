@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: FontSize.mid,
         marginBottom: 35,
-        marginTop: 60,
+        marginTop: 70,
         marginLeft: 25,
         marginRight: 50,
     },
@@ -42,6 +42,5 @@ const styles = StyleSheet.create({
         aspectRatio: 415 / 77,
         bottom: 0,
         position: 'absolute',
-        zIndex: -1,
     },
 })

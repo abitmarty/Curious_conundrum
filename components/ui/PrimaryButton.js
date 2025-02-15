@@ -30,7 +30,7 @@ function PrimaryButton({ children, onPress, typeBtn="continue", style }) {
                     pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer
                 }
                 onPress={onPress}
-                android_ripple={{ color: Colors.primary600 }}
+                android_ripple={{ color: Colors.ripple }}
             >
                 <ImageBackground
                     source={backgroundSource}

@@ -5,10 +5,13 @@ import SettingsOptions from "./SettingsOptions";
 import FontSize from "../../constants/FontSize";
 import Colors from '../../constants/colors';
 import TextCustom from "./TextCustom";
+import Shadow from "../../components/ui/Shadow";
+
 
 function SettingsCard({ title, subtitle, setting, options }) {
     return (
         <View style={styles.choiceView}>
+            <Shadow />
             <ImageBackground
                     source={require('../../assets/card/settings_card.png')}
                     style={styles.imageBackground}

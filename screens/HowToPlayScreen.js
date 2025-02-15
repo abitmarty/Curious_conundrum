@@ -6,6 +6,7 @@ import TextCustom from "../components/ui/TextCustom";
 import TitleCard from "../components/ui/TitleCard";
 import Colors from '../constants/colors';
 import Instruction from "../components/ui/Instruction";
+import Shadow from "../components/ui/Shadow";
 
 function HowToPlayScreen({ navigation }){
 

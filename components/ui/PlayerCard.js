@@ -2,6 +2,7 @@ import { Text, View, ImageBackground, StyleSheet } from "react-native";
 import PrimaryButton from "./PrimaryButton";
 import FontSize from "../../constants/FontSize";
 import TextCustom from "./TextCustom";
+import Shadow from "./Shadow";
 
 function PlayerCard({ children, onPress, style, cardColor }) {
     let background;
@@ -15,6 +16,7 @@ function PlayerCard({ children, onPress, style, cardColor }) {
 
     return(
         <View style={[styles.cardContainer, style]}>
+            <Shadow borderRadius={18} translate={10}/>
             <ImageBackground
                 source={background}
                 style={styles.imageBackground}
@@ -23,6 +25,7 @@ function PlayerCard({ children, onPress, style, cardColor }) {
                 <TextCustom style={styles.text}>{children}</TextCustom>
                 {onPress && (
                     <View style={styles.closeBtnContainer}>
+                        <Shadow borderRadius={10} translate={2}/>
                         <PrimaryButton style={{height: 30, borderRadius: 10}} typeBtn="remove" onPress={onPress} />
                     </View>
                 )}

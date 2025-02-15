@@ -19,7 +19,7 @@ function SettingsOptions({ setting, options }){
                     style={({ pressed }) => 
                         pressed ? [styles.optionsPressable, styles.pressed] : styles.optionsPressable
                     }
-                    android_ripple={{ color: Colors.primary600 }}
+                    android_ripple={{ color: Colors.ripple }}
                     >
                         <ImageBackground
                             source={settings[setting] === option
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     optionContainer: {
         flexDirection: 'row',
         width: '100%',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        paddingBottom: 5
     },
     choiceBackground: {
         aspectRatio: 425 / 161,
