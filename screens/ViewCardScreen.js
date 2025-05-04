@@ -9,25 +9,54 @@ import ViewCard from "../components/ui/ViewCard";
 import ViewStatement from "../components/ui/ViewStatement";
 import SmallButton from "../components/ui/SmallButton";
 import { casual } from "../conundrums/casual";
+import { edgy } from "../conundrums/edgy";
+import { overshare } from "../conundrums/overshare";
+import { SettingsContext } from "../store/context/SettingsContext";
+import { useActiveGame } from '../store/context/ActiveGameContext';
+
+
 
 function ViewCardScreen({ navigation }) {
+    const { settings } = useContext(SettingsContext);
     const { players } = useContext(GameContext);
+    const { liar, statement, liarStatement, setLiar, setStatement, setLiarStatement } = useActiveGame();
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
-    const [currentStatement, setCurrentStatement] = useState("");
     const [phase, setPhase] = useState("actionPhase");  // "viewingPhase" or "actionPhase"
-    const [excludedPlayerId, setExcludedPlayerId] = useState(null); // Track the excluded player
     const currentPlayer = players[currentPlayerIndex];
+
+    const getConundrumSet = () => {
+        switch (settings["gameMode"]) {
+            case "casual":
+                return casual;
+            case "edgy":
+                return edgy;
+            case "overshare":
+                return overshare;
+            default:
+                return casual; // Default to casual if no valid mode
+        }
+    };
 
     // Randomly select an excluded player on initial render
     useFocusEffect(
         React.useCallback(() => {
             if(players?.length > 0){
                 const randomIndex = Math.floor(Math.random() * players.length);
-                setExcludedPlayerId(players[randomIndex].id);
+                setLiar(players[randomIndex].id)
             }
-            if(casual?.length > 0){
-                const randomStatement = casual[Math.floor(Math.random() * casual.length)];
-                setCurrentStatement(randomStatement);
+            const conundrumSet = getConundrumSet();
+
+            if(conundrumSet?.length > 0){
+                const randomStatement = conundrumSet[Math.floor(Math.random() * conundrumSet.length)];
+                setStatement(randomStatement);
+
+                // Generate a random lie that is different from the statement
+                let randomLie = randomStatement;
+                while (randomLie === randomStatement) {
+                    randomLie = conundrumSet[Math.floor(Math.random() * conundrumSet.length)];
+                }
+
+                setLiarStatement(randomLie);
             }
         }, [players])
     );
@@ -37,7 +66,7 @@ function ViewCardScreen({ navigation }) {
             setCurrentPlayerIndex(currentPlayerIndex + 1);
         } else {
             // No more players, navigate to the next screen
-            navigation.navigate("CountDownScreen", { excludedPlayerId: excludedPlayerId}); // Replace with your next screen name
+            navigation.navigate("CountDownScreen"); // Replace with your next screen name
         }
     };
 
@@ -60,9 +89,9 @@ function ViewCardScreen({ navigation }) {
 
     const statementText = 
         phase === "viewingPhase"
-            ? (currentPlayer.id === excludedPlayerId 
-                ? "You are the liar" 
-                : currentStatement
+            ? (currentPlayer.id === liar 
+                ? liarStatement 
+                : statement
                 )
             : "";
     

@@ -13,11 +13,13 @@ import Colors from '../constants/colors';
 import FontSize from "../constants/FontSize";
 import ProgressBar from "../components/ui/ProgressBar";
 import TextCustom from "../components/ui/TextCustom";
+import { useActiveGame } from "../store/context/ActiveGameContext";
 
 
 
 
 function ScoreBoard({ navigation }){
+    const { resetGame } = useActiveGame();
     const { settings, updateSetting } = useContext(SettingsContext);
     const { players } = useContext(GameContext);
 

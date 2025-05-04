@@ -3,9 +3,14 @@ import FontSize from "../../constants/FontSize";
 import Colors from '../../constants/colors';
 import TextCustom from "./TextCustom";
 
-function ResultCard({ votedOutPlayer, excludedPlayer, correctVoting, style }) {
+function ResultCard({ votedOutPlayer, correctVoting, style, subTitleOverride }) {
 
-    const subTitle = correctVoting ? "Was the liar!" : "Was not the liar";
+    let subTitle = correctVoting ? "Was the liar!" : "Was not the liar!";
+
+    if (subTitleOverride) {
+      subTitle = subTitleOverride;
+    }
+
     const background = correctVoting ? require('../../assets/card/green_card.png') : require('../../assets/card/red_card.png');
 
     return (
@@ -15,7 +20,7 @@ function ResultCard({ votedOutPlayer, excludedPlayer, correctVoting, style }) {
                 style={styles.imageBackground}
                 resizeMode="cover"
             >
-                <TextCustom style={styles.title}>{votedOutPlayer.name}</TextCustom>
+                <TextCustom style={styles.title}>{votedOutPlayer}</TextCustom>
                 <TextCustom style={styles.subTitle}>{subTitle}</TextCustom>
             </ImageBackground>
         </View>
@@ -31,6 +36,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         aspectRatio: 415 / 137,
         width: '70%',
+        zIndex: 2,
     },
     imageBackground: {
         flex: 1,

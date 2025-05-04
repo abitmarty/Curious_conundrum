@@ -5,7 +5,7 @@ import { useRoute } from '@react-navigation/native';
 function GameBackground({ children, correctVoting }) {
     const route = useRoute(); // Access the current route (screen)
     const isHomeScreen = route.name === 'Home';
-    const constIsResultScreen = route.name === 'VoteResults';
+    const constIsResultScreen = route.name === 'VoteResults' || route.name === 'ShowLiar';
 
     return (
         !constIsResultScreen ? (

@@ -5,7 +5,7 @@ import TextCustom from "./TextCustom";
 
 function ViewStatement({ children, style }) {
     return (
-        <View style={[style, styles.mainContainer]}>
+        <View style={[styles.mainContainer, style]}>
             <TextCustom style={styles.statement}>{children}</TextCustom>
             <ImageBackground
                 source={require('../../assets/background/bottom_card_dark_blocked.png')}

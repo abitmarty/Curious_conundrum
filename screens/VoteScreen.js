@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useCallback  } from "react";
 import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { GameContext } from "../store/context/GameContext";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import GameBackground from "../components/ui/GameBackground";
@@ -7,16 +8,22 @@ import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import TitleCard from "../components/ui/TitleCard";
 import SmallButton from "../components/ui/SmallButton";
 import PlayerCardPressable from "../components/ui/PlayerCardPressable";
+import { useActiveGame } from "../store/context/ActiveGameContext";
 
-function VoteScreen({ navigation, route }){
+function VoteScreen({ navigation }){
     const { players } = useContext(GameContext);
-    const [selectedPlayer, setSelectedPlayer] = useState(null);
-    const { excludedPlayerId } = route.params;
+    const { votedOut, setVotedOut } = useActiveGame();
+
+    useFocusEffect(
+        useCallback(() => {
+            setVotedOut(null);
+        }, [])
+    );
 
     const renderItem = ({ item }) => {
         return (
             <View style={styles.cardContainer}>
-                <PlayerCardPressable selectedPlayer={selectedPlayer} item={item} onPress={() => setSelectedPlayer(item.id)}>
+                <PlayerCardPressable selectedPlayer={votedOut} item={item} onPress={() => setVotedOut(item.id)}>
                     {item.name}
                 </PlayerCardPressable>
             </View>
@@ -24,9 +31,10 @@ function VoteScreen({ navigation, route }){
     };
 
 
-    let functionCall;
-    if (selectedPlayer) {
-        functionCall = () => navigation.navigate("VoteResults", { playerIdVotedOut: selectedPlayer, excludedPlayerId: excludedPlayerId});
+    let functionCall = () => {}; // default no-op function
+
+    if (votedOut) {
+        functionCall = () => navigation.navigate("VoteResults");
     }
 
     return (
@@ -53,7 +61,7 @@ export default VoteScreen;
 
 const styles = StyleSheet.create({
     mainContainer:{
-        flex: 1,
+        flex: 0.8,
         justifyContent: 'center',
         alignItems: "center",
         gap: 20,

@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import ResultCard from "./ResultCard";
 
-function Result({ votedOutPlayer, excludedPlayer, correctVoting }) {
+function Result({ votedOutPlayer, correctVoting }) {
     return (
         <View style={styles.mainContainer}>
-            <ResultCard style={styles.rotated} votedOutPlayer={votedOutPlayer} excludedPlayer={excludedPlayer} correctVoting={correctVoting}/>
-            <ResultCard votedOutPlayer={votedOutPlayer} excludedPlayer={excludedPlayer} correctVoting={correctVoting}/>
+            <ResultCard style={styles.rotated} votedOutPlayer={votedOutPlayer} correctVoting={correctVoting}/>
+            <ResultCard votedOutPlayer={votedOutPlayer} correctVoting={correctVoting}/>
         </View>
     )
 }
