@@ -3,7 +3,7 @@ import Colors from '../../constants/colors';
 import FontSize from '../../constants/FontSize';
 import TextCustom from './TextCustom';
 
-function PrimaryButton({ children, onPress, typeBtn="continue", style }) {
+function PrimaryButton({ children, onPress, typeBtn="continue", style, disabled }) {
     let backgroundSource;
 
     if (typeBtn === "add") {
@@ -37,6 +37,7 @@ function PrimaryButton({ children, onPress, typeBtn="continue", style }) {
                     style={styles.imageBackground}
                     resizeMode="cover"
                 >
+                    {disabled && <View style={styles.disabledOverlay} />}
                     <TextCustom style={styles.buttonText}>
                         {children}
                     </TextCustom>
@@ -83,5 +84,11 @@ const styles = StyleSheet.create({
     },
     pressed: {
         opacity: 0.75,
+    },
+    disabledOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.6)', // Dark overlay
+        borderRadius: 28,
+        zIndex: 1,
     },
 });

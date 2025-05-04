@@ -23,6 +23,7 @@ function ViewCardScreen({ navigation }) {
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
     const [phase, setPhase] = useState("actionPhase");  // "viewingPhase" or "actionPhase"
     const currentPlayer = players[currentPlayerIndex];
+    const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const getConundrumSet = () => {
         switch (settings["gameMode"]) {
@@ -116,6 +117,18 @@ function ViewCardScreen({ navigation }) {
         return null;
     }
 
+    const handleButtonPress = () => {
+        if (buttonDisabled) return; // extra safeguard
+
+        setButtonDisabled(true);
+        changePhase();
+        startAnimation();
+
+        setTimeout(() => {
+            setButtonDisabled(false);
+        }, 1500);
+    }
+
     return (
         <GameBackground>
             <SmallButton onPress={() => navigation.popTo('Home')}/>
@@ -125,7 +138,7 @@ function ViewCardScreen({ navigation }) {
                     <ViewStatement>{statementText}</ViewStatement>
                 </Animated.View>
             </View>
-            <PrimaryButtonBottom onPress={() => {changePhase(); startAnimation();}}>{buttonText}</PrimaryButtonBottom>
+            <PrimaryButtonBottom onPress={handleButtonPress} disabled={buttonDisabled}>{buttonText}</PrimaryButtonBottom>
         </GameBackground>
     )
 }

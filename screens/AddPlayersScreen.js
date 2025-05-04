@@ -32,7 +32,9 @@ function AddPlayersScreen({ navigation }) {
 
   // You need at least 3 players to play the game
   let functionCall;
+  let buttonDisabled = true;
   if (players.length >= 3) {
+    buttonDisabled = false;
       functionCall = () => { addPlayerHandler(); navigation.navigate("SetRoundsScreen")};
   }
 
@@ -62,7 +64,7 @@ function AddPlayersScreen({ navigation }) {
           />
         </View>
       <View style={styles.footer}>
-        <PrimaryButton onPress={functionCall}>Continue</PrimaryButton>
+        <PrimaryButton disabled={buttonDisabled} onPress={functionCall}>Continue</PrimaryButton>
         <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
       </View>
     </GameBackground>

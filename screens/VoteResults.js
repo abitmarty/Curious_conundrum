@@ -57,9 +57,9 @@ function VoteResults({ navigation }){
           <Result correctVoting={correctVoting} votedOutPlayer={votedOutPlayer} />
         </View>
         {correctVoting ? 
-          <PrimaryButtonBottom typeBtn={"red"} onPress={() => navigation.navigate("ShowLiar")}>Continue</PrimaryButtonBottom>
+          <PrimaryButtonBottom typeBtn={"red"} onPress={() => navigation.navigate("ShowLiar")}>Reveal lie</PrimaryButtonBottom> // Cheesy Line
           :
-          <PrimaryButtonBottom onPress={() => navigation.navigate("ShowLiar")}>Continue</PrimaryButtonBottom>
+          <PrimaryButtonBottom onPress={() => navigation.navigate("ShowLiar")}>Reveal lie</PrimaryButtonBottom> // Cheesy Line
         }
     </GameBackground>
   )
