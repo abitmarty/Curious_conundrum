@@ -13,7 +13,7 @@ import { useActiveGame } from '../store/context/ActiveGameContext';
 
 function CountDownScreen({ navigation }) {
     const { statement } = useActiveGame();
-    const [countdown, setCountDown] = useState(1);
+    const [countdown, setCountDown] = useState(1); // Set seconds
 
     useFocusEffect(
         React.useCallback(() => {

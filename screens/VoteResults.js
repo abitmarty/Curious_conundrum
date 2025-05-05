@@ -27,7 +27,7 @@ function VoteResults({ navigation }){
   if (liar) {
     const foundLiar = players.find(player => player.id === liar);
     if (foundLiar) {
-      excludedPlayer = foundLiar.name;
+      excludedPlayer = foundLiar;
     }
   }
   

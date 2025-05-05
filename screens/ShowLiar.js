@@ -11,7 +11,7 @@ import ViewCard from "../components/ui/ViewCard";
 
 
 function ShowLiar({ navigation }) {
-    const { votedOut, liar, statement } = useActiveGame();
+    const { votedOut, liar, statement, liarStatement } = useActiveGame();
     const { players } = useContext(GameContext);
 
     const correctVoting = votedOut === liar;
@@ -23,7 +23,7 @@ function ShowLiar({ navigation }) {
         <View style={styles.centeredView}>
             <ResultCard correctVoting={!correctVoting} votedOutPlayer={excludedPlayer} subTitleOverride={"Liar's statement:"} />
             <View style={styles.statementText}>
-                <ViewStatement style={{ width: '70%' }}>{statement}</ViewStatement>
+                <ViewStatement style={{ width: '70%' }}>{liarStatement}</ViewStatement>
             </View>
         </View>
         <PrimaryButtonBottom onPress={() => navigation.navigate("ScoreBoard")}>Scoreboard</PrimaryButtonBottom>

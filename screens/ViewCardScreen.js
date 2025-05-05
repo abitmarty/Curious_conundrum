@@ -24,6 +24,7 @@ function ViewCardScreen({ navigation }) {
     const [phase, setPhase] = useState("actionPhase");  // "viewingPhase" or "actionPhase"
     const currentPlayer = players[currentPlayerIndex];
     const [buttonDisabled, setButtonDisabled] = useState(false);
+    const disabledTime = 100;
 
     const getConundrumSet = () => {
         switch (settings["gameMode"]) {
@@ -126,7 +127,7 @@ function ViewCardScreen({ navigation }) {
 
         setTimeout(() => {
             setButtonDisabled(false);
-        }, 1500);
+        }, disabledTime);
     }
 
     return (
