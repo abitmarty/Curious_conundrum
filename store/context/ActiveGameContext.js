@@ -5,10 +5,12 @@ export const ActiveGameContext = createContext({
   statement: null,
   liarStatement: null,
   votedOut: null,
+  conundrums: [],
   setLiar: () => {},
   setStatement: () => {},
   setLiarStatement: () => {},
   setVotedOut: () => {},
+  setConundrums: () => {},
   resetGame: () => {},
 });
 
@@ -17,12 +19,14 @@ export const ActiveGameProvider = ({ children }) => {
   const [statement, setStatement] = useState(null);
   const [liarStatement, setLiarStatement] = useState(null);
   const [votedOut, setVotedOut] = useState(null);
+  const [conundrums, setConundrums] = useState([]);
 
   const resetGame = () => {
     setLiar(null);
     setStatement(null);
     setLiarStatement(null);
     setVotedOut(null);
+    setConundrums([]);
   };
 
   return (
@@ -32,10 +36,12 @@ export const ActiveGameProvider = ({ children }) => {
         statement,
         liarStatement,
         votedOut,
+        conundrums,
         setLiar,
         setStatement,
         setLiarStatement,
         setVotedOut,
+        setConundrums,
         resetGame,
       }}
     >

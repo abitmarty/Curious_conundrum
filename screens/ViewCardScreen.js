@@ -19,12 +19,12 @@ import { useActiveGame } from '../store/context/ActiveGameContext';
 function ViewCardScreen({ navigation }) {
     const { settings } = useContext(SettingsContext);
     const { players } = useContext(GameContext);
-    const { liar, statement, liarStatement, setLiar, setStatement, setLiarStatement } = useActiveGame();
+    const { liar, statement, liarStatement, conundrums, setLiar, setStatement, setLiarStatement, setConundrums } = useActiveGame();
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
     const [phase, setPhase] = useState("actionPhase");  // "viewingPhase" or "actionPhase"
     const currentPlayer = players[currentPlayerIndex];
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    const disabledTime = 100;
+    const disabledTime = 1500; //1500
 
     const getConundrumSet = () => {
         switch (settings["gameMode"]) {
@@ -39,29 +39,37 @@ function ViewCardScreen({ navigation }) {
         }
     };
 
-    // Randomly select an excluded player on initial render
+
     useFocusEffect(
         React.useCallback(() => {
-            if(players?.length > 0){
-                const randomIndex = Math.floor(Math.random() * players.length);
-                setLiar(players[randomIndex].id)
+            // Select liar
+            if (players?.length > 0) {
+            const randomIndex = Math.floor(Math.random() * players.length);
+            setLiar(players[randomIndex].id);
             }
+
+            let workingSet = conundrums;
+
+            // Refill conundrums if needed
+            if (conundrums.length <= 2) {
             const conundrumSet = getConundrumSet();
-
-            if(conundrumSet?.length > 0){
-                const randomStatement = conundrumSet[Math.floor(Math.random() * conundrumSet.length)];
-                setStatement(randomStatement);
-
-                // Generate a random lie that is different from the statement
-                let randomLie = randomStatement;
-                while (randomLie === randomStatement) {
-                    randomLie = conundrumSet[Math.floor(Math.random() * conundrumSet.length)];
-                }
-
-                setLiarStatement(randomLie);
+            const shuffled = [...conundrumSet].sort(() => Math.random() - 0.5);
+            workingSet = shuffled;
             }
+
+            const [newStatement, ...rest] = workingSet;
+            const lie = rest.find((item) => item !== newStatement) || newStatement;
+            const newRemaining = rest.filter((item) => item !== lie);
+
+            setStatement(newStatement);
+            setLiarStatement(lie);
+            setConundrums(newRemaining);
+
+            console.log(newRemaining)
+
         }, [players])
     );
+      
 
     const nextPlayer = () => {
         if (currentPlayerIndex < players.length - 1) {
