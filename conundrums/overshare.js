@@ -19,5 +19,4 @@ export const overshare = [
     "Who would hook up with someone for revenge?",
     "Who’s most likely to fall in love with a criminal?",
     "Who’s hiding something big from the group?",
-    
 ]

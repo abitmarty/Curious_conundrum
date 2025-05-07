@@ -1,3 +1,5 @@
+import { useFocusEffect } from "@react-navigation/native";
+import React from 'react';
 import { Text, View, StyleSheet, ImageBackground } from "react-native";
 import PrimaryButtonBottom from "../components/ui/PrimaryButtonBottom";
 import GameBackground from "../components/ui/GameBackground";
@@ -7,8 +9,16 @@ import TitleCard from "../components/ui/TitleCard";
 import Colors from '../constants/colors';
 import Instruction from "../components/ui/Instruction";
 import Shadow from "../components/ui/Shadow";
+import { useActiveGame } from "../store/context/ActiveGameContext";
 
 function HowToPlayScreen({ navigation }){
+    const { resetGame } = useActiveGame();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            resetGame();
+        }, [])
+    );
 
     return (
         <GameBackground>

@@ -24,7 +24,7 @@ function ViewCardScreen({ navigation }) {
     const [phase, setPhase] = useState("actionPhase");  // "viewingPhase" or "actionPhase"
     const currentPlayer = players[currentPlayerIndex];
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    const disabledTime = 1500; //1500
+    const disabledTime = 10; //1500
 
     const getConundrumSet = () => {
         switch (settings["gameMode"]) {
@@ -64,9 +64,6 @@ function ViewCardScreen({ navigation }) {
             setStatement(newStatement);
             setLiarStatement(lie);
             setConundrums(newRemaining);
-
-            console.log(newRemaining)
-
         }, [players])
     );
       
