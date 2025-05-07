@@ -21,8 +21,12 @@ function ViewCardScreen({ navigation }) {
     const { players } = useContext(GameContext);
     const { liar, statement, liarStatement, conundrums, setLiar, setStatement, setLiarStatement, setConundrums } = useActiveGame();
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+    const rotatedPlayers = [
+        ...players.slice(settings.roundsPlayed % players.length),
+        ...players.slice(0, settings.roundsPlayed % players.length),
+      ];
     const [phase, setPhase] = useState("actionPhase");  // "viewingPhase" or "actionPhase"
-    const currentPlayer = players[currentPlayerIndex];
+    const currentPlayer = rotatedPlayers[currentPlayerIndex];
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const disabledTime = 10; //1500
 
@@ -57,10 +61,12 @@ function ViewCardScreen({ navigation }) {
             workingSet = shuffled;
             }
 
+            // Set statement and lie
             const [newStatement, ...rest] = workingSet;
             const lie = rest.find((item) => item !== newStatement) || newStatement;
             const newRemaining = rest.filter((item) => item !== lie);
 
+            // Store the available statments
             setStatement(newStatement);
             setLiarStatement(lie);
             setConundrums(newRemaining);
