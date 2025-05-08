@@ -10,11 +10,14 @@ import PlayerCard from "../components/ui/PlayerCard";
 import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
 import FontSize from "../constants/FontSize";
 import TextCustom from "../components/ui/TextCustom";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 
 function AddPlayersScreen({ navigation }) {
   const [playerName, setPlayerName] = useState("");
   const { players, addPlayer, removePlayer } = useContext(GameContext);
   const inputRef = useRef(null);
+  const insets = useSafeAreaInsets();
 
   const addPlayerHandler = () => {
     if (playerName.trim().length === 0) return;
@@ -80,10 +83,10 @@ function AddPlayersScreen({ navigation }) {
           columnWrapperStyle={styles.row}
         />
       </View>
-      <Animated.View style={[styles.footerTop, { transform: [{ translateY: slideAnim }] }]}>
+      <Animated.View style={[styles.footerTop, { bottom: insets.bottom + 100, transform: [{ translateY: slideAnim }] }]}>
         <TextCustom style={styles.footerText}>{footerTopText}</TextCustom>
       </Animated.View>
-      <View style={styles.footer}>
+      <View style={[styles.footer, { bottom: insets.bottom}]}>
         <PrimaryButton disabled={buttonDisabled} onPress={functionCall}>Continue</PrimaryButton>
         <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
       </View>
@@ -129,7 +132,6 @@ const styles = StyleSheet.create({
     },
     footerTop: {
       position: 'absolute',
-      bottom: 100, // just above the footer
       zIndex: 0,
       width: '100%',
       alignItems: 'center',

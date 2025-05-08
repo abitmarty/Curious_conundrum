@@ -1,11 +1,14 @@
 import { ImageBackground, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import Colors from '../../constants/colors';
 import { useRoute } from '@react-navigation/native';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+
 
 function GameBackground({ children, correctVoting }) {
     const route = useRoute(); // Access the current route (screen)
     const isHomeScreen = route.name === 'Home';
     const constIsResultScreen = route.name === 'VoteResults' || route.name === 'ShowLiar';
+    const insets = useSafeAreaInsets();
 
     return (
         !constIsResultScreen ? (
@@ -21,13 +24,13 @@ function GameBackground({ children, correctVoting }) {
                 </ImageBackground>
                 <ImageBackground
                     source={require('../../assets/background/bottom.png')}
-                    style={styles.backgroundBottom}
+                    style={[styles.backgroundBottom, {bottom: insets.bottom}]}
                     resizeMode="cover"
                 >
                 </ImageBackground>
-                <SafeAreaView style={styles.safeAreaContainer}>
-                    {children}
-                </SafeAreaView>
+                <SafeAreaProvider style={[styles.safeAreaContainer, { paddingTop: insets.top}]}>
+                        {children}
+                </SafeAreaProvider>
             </View>
         ) :
         (
@@ -45,7 +48,7 @@ export default GameBackground;
 const styles = StyleSheet.create({
     safeAreaContainer: {
         flex: 1,
-        paddingTop: 20, // Adjust for top bar padding if needed
+        paddingTop: 0, // Adjust for top bar padding if needed
     },
     backgroundTop: {
         width: '100%',
