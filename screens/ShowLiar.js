@@ -20,10 +20,12 @@ function ShowLiar({ navigation }) {
     return (
         <GameBackground correctVoting={!correctVoting}>
         <SmallButton onPress={() => navigation.popTo('Home')}/>
-        <View style={styles.centeredView}>
-            <ResultCard correctVoting={!correctVoting} votedOutPlayer={excludedPlayer} subTitleOverride={"Liar's statement:"} />
-            <View style={styles.statementText}>
-                <ViewStatement style={{ width: '70%' }}>{liarStatement}</ViewStatement>
+        <View style={styles.mainContainer}>
+            <View style={styles.centeredView}>
+                <ResultCard correctVoting={!correctVoting} votedOutPlayer={excludedPlayer} subTitleOverride={"Liar's statement:"} />
+                <View style={styles.statementText}>
+                    <ViewStatement style={{ width: '70%' }}>{liarStatement}</ViewStatement>
+                </View>
             </View>
         </View>
         <PrimaryButtonBottom onPress={() => navigation.navigate("ScoreBoard")}>Scoreboard</PrimaryButtonBottom>
@@ -36,6 +38,9 @@ function ShowLiar({ navigation }) {
 export default ShowLiar;
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1
+    },
     centeredView: {
       position: 'absolute',
       justifyContent: "center",

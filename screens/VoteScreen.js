@@ -61,7 +61,7 @@ export default VoteScreen;
 
 const styles = StyleSheet.create({
     mainContainer:{
-        flex: 0.8,
+        flex: 1,
         justifyContent: 'center',
         alignItems: "center",
         gap: 20,

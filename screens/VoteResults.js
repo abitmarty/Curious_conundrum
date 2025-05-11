@@ -53,9 +53,11 @@ function VoteResults({ navigation }){
   return (
     <GameBackground correctVoting={correctVoting}>
       <SmallButton onPress={() => navigation.popTo('Home')}/>
+      <View style={styles.mainContainer}>
         <View style={styles.centeredView}>
-          <Result correctVoting={correctVoting} votedOutPlayer={votedOutPlayer} />
-        </View>
+            <Result correctVoting={correctVoting} votedOutPlayer={votedOutPlayer} />
+          </View>
+      </View>
         {correctVoting ? 
           <PrimaryButtonBottom typeBtn={"red"} onPress={() => navigation.navigate("ShowLiar")}>Reveal lie</PrimaryButtonBottom> // Cheesy Line
           :
@@ -68,6 +70,9 @@ function VoteResults({ navigation }){
 export default VoteResults;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1
+  },
   centeredView: {
     position: 'absolute',
     justifyContent: "center",
@@ -75,6 +80,6 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     right: 0,
-    left: 0,    
+    left: 0,
   }
 })

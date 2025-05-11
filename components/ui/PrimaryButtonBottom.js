@@ -19,7 +19,6 @@ export default PrimaryButtonBottom;
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        position: 'absolute',
         bottom: 0,
         left: 0,
         right: 0,

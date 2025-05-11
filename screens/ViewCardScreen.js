@@ -96,7 +96,7 @@ function ViewCardScreen({ navigation }) {
     const buttonText =
         phase === "viewingPhase"
             ? currentPlayerIndex === players.length - 1
-                ? "Start countdown"
+                ? "Continue"
                 : "Next player"
             : "Show statement";
 
