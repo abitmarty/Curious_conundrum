@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
-import { View, FlatList, StyleSheet, Animated } from "react-native";
+import { View, FlatList, StyleSheet, Animated, KeyboardAvoidingView, Platform } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { GameContext } from "../store/context/GameContext";
 import GameBackground from "../components/ui/GameBackground";
@@ -60,36 +60,43 @@ function AddPlayersScreen({ navigation }) {
 
   return (
     <GameBackground>
-      <SmallButton onPress={() => navigation.popTo('Home')}/>
-      <View style={styles.mainContainer}>
-        <InputCard
-          title="Add Players:"
-          placeholder="Player name"
-          value={playerName}
-          onChangeText={setPlayerName}
-          onSubmitEditing={addPlayerHandler}
-        />
-        <FlatList
-          data={players}
-          numColumns={2}
-          keyExtractor={(item, index) => index.toString()}
-          style={styles.flat}
-          renderItem={({ item }) => (
-            <View style={styles.cardContainer}>
-              <PlayerCard onPress={() => removePlayerHandler(item.id)}>{item.name}</PlayerCard>
-            </View>
-          )}
-          contentContainerStyle={styles.flatListContent}
-          columnWrapperStyle={styles.row}
-        />
-      </View>
-      <Animated.View style={[styles.footerTop, { bottom: insets.bottom + 100, transform: [{ translateY: slideAnim }] }]}>
-        <TextCustom style={styles.footerText}>{footerTopText}</TextCustom>
-      </Animated.View>
-      <View style={[styles.footer, { bottom: insets.bottom}]}>
-        <PrimaryButton disabled={buttonDisabled} onPress={functionCall}>Continue</PrimaryButton>
-        <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
-      </View>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'height' : 'height'}
+        >
+        <SmallButton onPress={() => navigation.popTo('Home')}/>
+        <View style={{ flex: 1, justifyContent: 'space-between' }}>
+          <View style={styles.mainContainer}>
+            <InputCard
+              title="Add Players:"
+              placeholder="Player name"
+              value={playerName}
+              onChangeText={setPlayerName}
+              onSubmitEditing={addPlayerHandler}
+            />
+            <FlatList
+              data={players}
+              numColumns={2}
+              keyExtractor={(item, index) => index.toString()}
+              style={styles.flat}
+              renderItem={({ item }) => (
+                <View style={styles.cardContainer}>
+                  <PlayerCard onPress={() => removePlayerHandler(item.id)}>{item.name}</PlayerCard>
+                </View>
+              )}
+              contentContainerStyle={styles.flatListContent}
+              columnWrapperStyle={styles.row}
+            />
+          </View>
+          <Animated.View style={[styles.footerTop, { bottom: insets.bottom + 100, transform: [{ translateY: slideAnim }] }]}>
+            <TextCustom style={styles.footerText}>{footerTopText}</TextCustom>
+          </Animated.View>
+          <View style={[styles.footer, { marginBottom: insets.bottom }]}>
+            <PrimaryButton disabled={buttonDisabled} onPress={functionCall}>Continue</PrimaryButton>
+            <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
     </GameBackground>
   );
 }
@@ -122,11 +129,7 @@ const styles = StyleSheet.create({
       borderTopWidth: 1,
       borderTopColor: Colors.border,
       backgroundColor: Colors.background,
-      position: 'absolute',
       height: 90,
-      bottom: 0,
-      left: 0,
-      right: 0,
       gap: 14,
       zIndex: 2,
     },
