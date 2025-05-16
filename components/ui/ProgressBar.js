@@ -4,14 +4,16 @@ import Colors from '../../constants/colors';
 import FontSize from "../../constants/FontSize";
 import { SettingsContext } from "../../store/context/SettingsContext";
 import TextCustom from "./TextCustom";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function ProgressBar() {
+    const insets = useSafeAreaInsets();
     const { settings, updateSetting } = useContext(SettingsContext);
 
     const progressPercentage = (settings.roundsPlayed / settings.rounds) * 100;
 
     return (
-        <View style={styles.mainContainer}>
+        <View style={[styles.mainContainer, { bottom: insets.bottom }]}>
             <View style={[styles.progress, {width: `${progressPercentage}%`}]}></View>
             <TextCustom style={styles.rounds}>Round: {settings.roundsPlayed}/{settings.rounds}</TextCustom>
         </View>
