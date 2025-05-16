@@ -108,7 +108,7 @@ function AddPlayersScreen({ navigation }) {
           <Animated.View style={[styles.footerTop, { bottom: insets.bottom + 100, transform: [{ translateY: slideAnim }] }]}>
             <TextCustom style={styles.footerText}>{footerTopText}</TextCustom>
           </Animated.View>
-          <View style={[styles.footer, { bottom: insets.bottom }]}>
+          <View style={[styles.footer, { marginBottom: insets.bottom }]}>
             <PrimaryButton disabled={buttonDisabled} onPress={functionCall}>Continue</PrimaryButton>
             <PrimaryButton onPress={addPlayerHandler} typeBtn="add" ></PrimaryButton>
           </View>
@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
       borderTopColor: Colors.border,
       backgroundColor: Colors.background,
       height: 90,
-      bottom:0,
       gap: 14,
       zIndex: 2,
     },
