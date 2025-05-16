@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
-import { View, FlatList, StyleSheet, Animated, KeyboardAvoidingView, Platform } from "react-native";
+import { View, FlatList, StyleSheet, Animated, KeyboardAvoidingView, Platform, Keyboard } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { GameContext } from "../store/context/GameContext";
 import GameBackground from "../components/ui/GameBackground";
@@ -57,12 +57,29 @@ function AddPlayersScreen({ navigation }) {
     }).start();
   }, [players.length]);
 
+  const [keyboardOffset, setKeyboardOffset] = useState(-insets.bottom);
+
+  useEffect(() => {
+    const showingOffset = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardOffset(-insets.bottom);
+    });
+    const hiddenOffset = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardOffset(-insets.top - insets.bottom);
+    });
+
+    return () => {
+      showingOffset.remove();
+      hiddenOffset.remove();
+    };
+  }, []);
+
 
   return (
     <GameBackground>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'height' : 'height'}
+        keyboardVerticalOffset={keyboardOffset}
         >
         <SmallButton onPress={() => navigation.popTo('Home')}/>
         <View style={{ flex: 1, justifyContent: 'space-between' }}>

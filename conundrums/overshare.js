@@ -10,7 +10,7 @@ export const overshare = [
     "Who would make the worst parent?",
     "Who has the best parents?",
     "Who has had the worst childhood?",
-    "Who will start the next reigh?",
+    "Who will start the 3th reich?",
     "If you where a can, who could drink you?",
     "Who is most likely to kill a whole family?",
     "Who would ghost everyone and vanish?",

@@ -28,9 +28,9 @@ function GameBackground({ children, correctVoting }) {
                     resizeMode="cover"
                 >
                 </ImageBackground>
-                <SafeAreaProvider style={[styles.safeAreaContainer, { paddingTop: insets.top}]}>
+                <SafeAreaView style={[styles.safeAreaContainer, { paddingTop: insets.top}]}>
                         {children}
-                </SafeAreaProvider>
+                </SafeAreaView>
             </View>
         ) :
         (
