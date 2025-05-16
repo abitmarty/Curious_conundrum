@@ -1,4 +1,4 @@
-import React, { useContext, useCallback  } from "react";
+import React, { useContext, useCallback, useState, useEffect  } from "react";
 import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { GameContext } from "../store/context/GameContext";
@@ -13,12 +13,19 @@ import { useActiveGame } from "../store/context/ActiveGameContext";
 function VoteScreen({ navigation }){
     const { players } = useContext(GameContext);
     const { votedOut, setVotedOut } = useActiveGame();
+    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     useFocusEffect(
         useCallback(() => {
             setVotedOut(null);
         }, [])
     );
+
+    useEffect(() => {
+        if (votedOut != null) {
+            setButtonDisabled(false);
+        }
+    }, [votedOut]);
 
     const renderItem = ({ item }) => {
         return (
@@ -52,7 +59,7 @@ function VoteScreen({ navigation }){
                     columnWrapperStyle={styles.row}
                 />
             </View>
-            <PrimaryButtonBottom onPress={functionCall}>Vote out!</PrimaryButtonBottom>
+            <PrimaryButtonBottom disabled={buttonDisabled} onPress={functionCall}>Vote out!</PrimaryButtonBottom>
         </GameBackground>
     )
 }

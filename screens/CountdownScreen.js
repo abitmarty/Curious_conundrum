@@ -34,10 +34,10 @@ function CountDownScreen({ navigation }) {
 
     useEffect(() => {
         if (countdown === 0) {
-          setButtonDisabled(false);
-          startAnimation();
+            setButtonDisabled(false);
+            startAnimation();
         }
-      }, [countdown]);
+    }, [countdown]);
 
     const handleButtonPress = () => {
         navigation.navigate("VoteScreen")
