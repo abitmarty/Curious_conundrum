@@ -4,6 +4,7 @@ import Colors from '../../constants/colors';
 import FontSize from "../../constants/FontSize";
 import TextCustom from "./TextCustom";
 import Shadow from "./Shadow";
+import TextInputCustom from "./TextInputCustom";
 
 function InputCard({ title, value, onChangeText, placeholder, onSubmitEditing }) {
     return (
@@ -16,8 +17,7 @@ function InputCard({ title, value, onChangeText, placeholder, onSubmitEditing })
             >
                 <View style={styles.cardContent}>
                     <TextCustom style={styles.title}>{title}</TextCustom>
-                    <TextInput
-                        style={styles.input}
+                    <TextInputCustom
                         placeholder={placeholder}
                         value={value}
                         onChangeText={((text) => onChangeText(text.slice(0, 12)))}
@@ -58,15 +58,5 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: FontSize.big,
-    },
-    input: {
-        width: '100%',
-        backgroundColor: "white",
-        borderRadius: 10,
-        padding: 6,
-        fontSize: FontSize.mid,
-        color: "#000",
-        textAlign: 'center',
-        fontWeight: 'bold',
     },
 });

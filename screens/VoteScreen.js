@@ -13,19 +13,12 @@ import { useActiveGame } from "../store/context/ActiveGameContext";
 function VoteScreen({ navigation }){
     const { players } = useContext(GameContext);
     const { votedOut, setVotedOut } = useActiveGame();
-    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     useFocusEffect(
         useCallback(() => {
             setVotedOut(null);
         }, [])
     );
-
-    useEffect(() => {
-        if (votedOut != null) {
-            setButtonDisabled(false);
-        }
-    }, [votedOut]);
 
     const renderItem = ({ item }) => {
         return (
@@ -59,7 +52,7 @@ function VoteScreen({ navigation }){
                     columnWrapperStyle={styles.row}
                 />
             </View>
-            <PrimaryButtonBottom disabled={buttonDisabled} onPress={functionCall}>Vote out!</PrimaryButtonBottom>
+            <PrimaryButtonBottom disabled={votedOut === null} onPress={functionCall}>Vote out!</PrimaryButtonBottom>
         </GameBackground>
     )
 }
