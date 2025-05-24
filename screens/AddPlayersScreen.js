@@ -103,6 +103,10 @@ function AddPlayersScreen({ navigation }) {
               )}
               contentContainerStyle={styles.flatListContent}
               columnWrapperStyle={styles.row}
+              // Android: no edge glow
+              overScrollMode="never"
+              // iOS: no bounce-back
+              bounces={false}
             />
           </View>
           <Animated.View style={[styles.footerTop, { bottom: insets.bottom + 100, transform: [{ translateY: slideAnim }] }]}>

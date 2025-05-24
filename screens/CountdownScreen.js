@@ -20,13 +20,13 @@ function CountDownScreen({ navigation }) {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [startedCountdown, setStartedCountdown] = useState(false);
 
-    const initialValue = -60;  // Define the initial value here
+    const initialValue = -20;  // Define the initial value here
 
     const translation = useRef(new Animated.Value(initialValue)).current;
 
     const startAnimation = () => {
         Animated.timing(translation, {
-            toValue: 0,
+            toValue: translation.__getValue() === initialValue ? 70 : initialValue,
             duration: 200,
             useNativeDriver: true,
         }).start();
@@ -75,19 +75,21 @@ function CountDownScreen({ navigation }) {
         <GameBackground>
             <SmallButton onPress={() => navigation.popTo('Home')}/>
             <View style={styles.centeredView}>
-            {countdown === 0 ? (
-                <>
-                    <ViewCard subtitle={"Read out loud:"}>Statement</ViewCard>
-                </>
-            ) : (
-                <>
-                    <ViewCard subtitle={countdown.toString()}>Countdown and point!</ViewCard>
-                </>
-            )}
-                <Animated.View style={[styles.statementText, { transform: [{ translateY: translation }] }]}>
-                    <ViewStatement>{countdown === 0 ? statement : ""}</ViewStatement>
-                </Animated.View>
-            </View>
+                <View style={styles.stopOverflow}>
+                    {countdown === 0 ? (
+                        <>
+                            <ViewCard selectedGreen={ true } style={{ width: '100%' }} subtitle={"Read out loud:"}>Statement</ViewCard>
+                        </>
+                    ) : (
+                        <>
+                            <ViewCard selectedGreen={ true } style={{ width: '100%' }} subtitle={countdown.toString()}>Countdown and point!</ViewCard>
+                        </>
+                    )}
+                        <Animated.View style={[styles.statementText, { transform: [{ translateY: translation }] }]}>
+                            <ViewStatement>{countdown === 0 ? statement : ""}</ViewStatement>
+                        </Animated.View>
+                    </View>
+                </View>
             {startedCountdown ? (
                 <PrimaryButtonBottom disabled={buttonDisabled} onPress={handleButtonPress}>Vote!</PrimaryButtonBottom>
                 ) : (
@@ -103,12 +105,18 @@ export default CountDownScreen;
 const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
-        justifyContent: "center",
         alignItems: "center",
         top: 0,
         bottom: 0,
         right: 0,
-        left: 0,  
+        left: 0,
+    },
+    stopOverflow: {
+        flex: 1,
+        alignItems: "center",
+        borderRadius: 34,
+        width: '80%',
+        overflow: 'hidden',
     },
     statementText: {
         alignItems: 'center',

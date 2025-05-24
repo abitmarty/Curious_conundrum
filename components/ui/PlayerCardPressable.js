@@ -18,7 +18,7 @@ function PlayerCardPressable({ children, onPress, selectedPlayer, item }) {
                 >
                     <ImageBackground
                         source={selectedPlayer === item.id
-                            ? require('../../assets/card/player_card_red.png')
+                            ? require('../../assets/card/player_card_selected_green.png')
                             : require('../../assets/card/player_card.png')}
                         style={styles.imageBackground}
                         resizeMode="cover"

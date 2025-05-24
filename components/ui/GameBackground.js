@@ -35,7 +35,7 @@ function GameBackground({ children, correctVoting }) {
         ) :
         (
             <View style={[styles.gameContainer, correctVoting ? styles.gameContainerTrue : styles.gameContainerFalse]}>
-                <SafeAreaView style={styles.safeAreaContainer}>
+                <SafeAreaView style={[styles.safeAreaContainer, { paddingTop: insets.top}]}>
                     {children}
                 </SafeAreaView>
             </View>

@@ -11,7 +11,7 @@ function InputCard({ title, value, onChangeText, placeholder, onSubmitEditing })
         <View style={styles.cardContainer}>
             <Shadow/>
             <ImageBackground
-                source={require('../../assets/card/input_card.png')} // Replace with your image path
+                source={require('../../assets/card/input_card_black.png')} // Replace with your image path
                 style={styles.imageBackground}
                 resizeMode="cover"
             >

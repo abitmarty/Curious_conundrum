@@ -4,11 +4,14 @@ import FontSize from "../../constants/FontSize";
 import TextCustom from "./TextCustom";
 import Shadow from "./Shadow";
 
-function ViewCard({ children, subtitle }) {
+function ViewCard({ children, subtitle, style, selectedGreen = false }) {
     return (
-        <View style={styles.cardContainer}>
+        <View style={[styles.cardContainer, style]}>
             <ImageBackground
-            source={require('../../assets/card/input_card.png')}
+            source={selectedGreen
+                ? require('../../assets/card/input_card_selection_green.png')
+                : require('../../assets/card/input_card_black.png')
+            }
             style={styles.imageBackground}>
                 <TextCustom style={styles.title}>{children}</TextCustom>
                 <TextCustom style={styles.subtitle}>{subtitle}</TextCustom>
@@ -22,11 +25,17 @@ export default ViewCard;
 const styles = StyleSheet.create({
     cardContainer: {
         borderRadius: 28,
-        margin: 4,
         aspectRatio: 425 / 161,
         width: '80%',
         position: 'absolute',
         zIndex: 2,
+    },
+    stopOverflow: {
+        flex: 1,
+        alignItems: "center",
+        backgroundColor: 'blue',
+        borderRadius: 28,
+        width: '100%'
     },
     imageBackground: {
         flex: 1,

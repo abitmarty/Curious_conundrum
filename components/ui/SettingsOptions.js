@@ -23,7 +23,7 @@ function SettingsOptions({ setting, options }){
                     >
                         <ImageBackground
                             source={settings[setting] === option
-                                ? require('../../assets/card/input_card.png')
+                                ? require('../../assets/card/input_card_selection_green.png')
                                 : require('../../assets/card/input_card_black.png')} // Replace with your actual image
                             style={styles.choiceBackground} // New style for image background
                             resizeMode="cover"

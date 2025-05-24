@@ -50,6 +50,10 @@ function VoteScreen({ navigation }){
                     renderItem={renderItem}
                     contentContainerStyle={styles.flatListContent}
                     columnWrapperStyle={styles.row}
+                    // Android: no edge glow
+                    overScrollMode="never"
+                    // iOS: no bounce-back
+                    bounces={false}
                 />
             </View>
             <PrimaryButtonBottom disabled={votedOut === null} onPress={functionCall}>Vote out!</PrimaryButtonBottom>

@@ -87,6 +87,10 @@ function ScoreBoard({ navigation }){
                     renderItem={({ item, index }) => renderPlayer({ item, index, totalPlayers: sortedPlayers.length })}
                     keyExtractor={(item) => item.id}
                     style={{ width: '100%' }}
+                    // Android: no edge glow
+                    overScrollMode="never"
+                    // iOS: no bounce-back
+                    bounces={false}
                 />
             </View>
             {settings.roundsPlayed >= settings.rounds ? (

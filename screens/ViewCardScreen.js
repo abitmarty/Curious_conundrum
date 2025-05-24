@@ -113,7 +113,7 @@ function ViewCardScreen({ navigation }) {
                 ? "Give the phone to:"
                 : "Read the statement:";
 
-    const initialValue = 5;  // Define the initial value here
+    const initialValue = -20;  // Define the initial value here
 
     const translation = useRef(new Animated.Value(initialValue)).current;
 
@@ -145,10 +145,12 @@ function ViewCardScreen({ navigation }) {
         <GameBackground>
             <SmallButton onPress={() => navigation.popTo('Home')}/>
             <View style={styles.mainContainer}>
-                <ViewCard subtitle={currentPlayer.name}>{viewCardText}</ViewCard>
-                <Animated.View style={[styles.animated, { transform: [{ translateY: translation }] }]}>
-                    <ViewStatement>{statementText}</ViewStatement>
-                </Animated.View>
+                <View style={styles.stopOverflow}>
+                    <ViewCard style={{ width: '100%' }} subtitle={currentPlayer.name}>{viewCardText}</ViewCard>
+                    <Animated.View style={[styles.animated, { transform: [{ translateY: translation }] }]}>
+                        <ViewStatement>{statementText}</ViewStatement>
+                    </Animated.View>
+                </View>
             </View>
             <PrimaryButtonBottom onPress={handleButtonPress} disabled={buttonDisabled}>{buttonText}</PrimaryButtonBottom>
         </GameBackground>
@@ -161,7 +163,13 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         alignItems: "center",
-        marginTop: 50,
+    },
+    stopOverflow: {
+        flex: 1,
+        alignItems: "center",
+        borderRadius: 34,
+        width: '80%',
+        overflow: 'hidden',
     },
     subContainer: {
         width: '100%',
