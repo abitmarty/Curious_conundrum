@@ -28,7 +28,11 @@ function ShowLiar({ navigation }) {
                 </View>
             </View>
         </View>
-        <PrimaryButtonBottom onPress={() => navigation.navigate("ScoreBoard")}>Scoreboard</PrimaryButtonBottom>
+        {!correctVoting ? 
+            <PrimaryButtonBottom typeBtn={"red"} onPress={() => navigation.navigate("ScoreBoard")}>Scoreboard</PrimaryButtonBottom>
+          :
+            <PrimaryButtonBottom onPress={() => navigation.navigate("ScoreBoard")}>Scoreboard</PrimaryButtonBottom>
+        }
 
 
       </GameBackground>
