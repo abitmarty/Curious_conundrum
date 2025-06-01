@@ -7,10 +7,13 @@ export const GameContext = createContext({
   addPlayer: (player) => {}, // Function to add a player
   removePlayer: (playerId) => {}, // Function to remove a player
   changeScore: (playerId, addition) => {}, // Function to change player's score
+  totalRounds: 0,
+  incrementRounds: () => {},
 });
 
 function GameContextProvider({ children }) {
   const [players, setPlayers] = useState([]);
+  const [totalRounds, setTotalRounds] = useState(0);
 
   // Load players from AsyncStorage when the app starts
   useEffect(() => {
@@ -43,6 +46,22 @@ function GameContextProvider({ children }) {
     }
   }, [players]);
 
+  // Load totalRounds from AsyncStorage on mount
+  useEffect(() => {
+    const loadRounds = async () => {
+      try {
+        const savedRounds = await AsyncStorage.getItem("totalRounds");
+        if (savedRounds !== null) {
+          setTotalRounds(parseInt(savedRounds, 10));
+        }
+      } catch (error) {
+        console.error("Failed to load total rounds from AsyncStorage:", error);
+      }
+    };
+
+    loadRounds();
+  }, []);
+
   // Function to add a player to the list
   function addPlayer(playerName) {
     const newPlayer = { id: uuid.v4(), name: playerName, score: 0 };
@@ -67,11 +86,23 @@ function GameContextProvider({ children }) {
     );
   }
 
+  async function incrementRounds() {
+    try {
+      const newTotal = totalRounds + 1;
+      setTotalRounds(newTotal);
+      await AsyncStorage.setItem("totalRounds", newTotal.toString());
+    } catch (error) {
+      console.error("Failed to increment total rounds:", error);
+    }
+  }
+
   const value = {
-    players: players,
-    addPlayer: addPlayer,
-    removePlayer: removePlayer,
-    changeScore: changeScore,
+    players,
+    addPlayer,
+    removePlayer,
+    changeScore,
+    totalRounds,
+    incrementRounds,
   };
 
   return (

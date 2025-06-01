@@ -16,7 +16,7 @@ import TextCustom from "../components/ui/TextCustom";
 
 function ScoreBoard({ navigation }){
     const { settings, updateSetting } = useContext(SettingsContext);
-    const { players } = useContext(GameContext);
+    const { players, incrementRounds } = useContext(GameContext);
 
     const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
 
@@ -74,6 +74,7 @@ function ScoreBoard({ navigation }){
     useEffect(() => {
         if (isFocused) {
             updateSetting('roundsPlayed', settings.roundsPlayed + 1);
+            incrementRounds();
         }
     }, [isFocused]); // Re-run effect when `isFocused` changes
 

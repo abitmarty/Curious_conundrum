@@ -3,7 +3,7 @@ import Colors from "../../constants/colors";
 import TextCustom from "./TextCustom";
 import FontSize from "../../constants/FontSize";
 
-function Instruction({ color, children, subTitle, hasBorder=true}) {
+function Instruction({ color, children, subTitle, hasBorder=true }) {
     return (
         <View style={[styles.mainContainer, hasBorder ? styles.mainBorder : {}]}>
             <View style={[styles.leftContainer, color ? {backgroundColor: color} : {}]}>
