@@ -5,25 +5,33 @@ import TextCustom from "./TextCustom";
 import FontSize from "../../constants/FontSize";
 import { SettingsContext } from "../../store/context/SettingsContext";
 
-function ActivateThemeButton({ theme, onActivate }) {
-    const { settings, updateSetting, resetSettings } = useContext(SettingsContext);
+function ActivateThemeButton({ themeIsAvailable, theme }) {
+    const { settings, updateSetting } = useContext(SettingsContext);
+
+    const handleButtonPress = () => {
+        if(themeIsAvailable) {
+            updateSetting("gameMode", theme)
+        }
+    }
 
     return (
         <View style={styles.choiseContainer}>
             <Pressable
-            onPress={() => {}}
+            onPress={handleButtonPress}
             style={({ pressed }) => 
                 pressed ? [styles.optionsPressable, styles.pressed] : styles.optionsPressable
             }
             android_ripple={{ color: Colors.ripple }}
             >
                 <ImageBackground
-                    source={require('../../assets/card/input_card_black.png')}
+                    source={settings["gameMode"] === theme
+                                ? require('../../assets/card/input_card_selection_green.png')
+                                : require('../../assets/card/input_card_black.png')} // Replace with your actual image
                     style={styles.choiceBackground} // New style for image background
                     resizeMode="cover"
                 >
                     <TextCustom style={styles.choiceText}>
-                        Active
+                        {themeIsAvailable ? "Active" : "Unlock"}
                     </TextCustom>
                 </ImageBackground>
             </Pressable>
@@ -57,7 +65,7 @@ const styles = StyleSheet.create({
     },
     choiseContainer: {
         width: 90,
-        borderRadius: 14,
+        borderRadius: 8,
         overflow: 'hidden'
     }
 })

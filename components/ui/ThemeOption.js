@@ -5,9 +5,16 @@ import TextCustom from "./TextCustom";
 import FontSize from "../../constants/FontSize";
 import ActivateThemeButton from "./ActivateThemeButton";
 import { GameContext } from "../../store/context/GameContext";
+import ThemeOptionProgressbar from "./ThemeOptionProgressbar";
 
-function ThemeOption({ color, children, subTitle, hasBorder=true }){
+function ThemeOption({ theme, roundLimit, color, children, subTitle, hasBorder=true }){
     const { totalRounds } = useContext(GameContext);
+    
+    // Determine if the theme is available based on the round limit
+    let themeIsAvailable = false;
+    if (roundLimit === undefined || totalRounds >= roundLimit) {
+        themeIsAvailable = true;
+    }
 
     return (
         <View style={[styles.mainContainer, hasBorder ? styles.mainBorder : {}]}>
@@ -21,14 +28,15 @@ function ThemeOption({ color, children, subTitle, hasBorder=true }){
                 <View style={styles.rightContainer}>
                     <View style={styles.titleContainer}>
                         <TextCustom style={styles.title}>{children}</TextCustom>
-                        <ActivateThemeButton />
+                        <ActivateThemeButton theme={theme} themeIsAvailable={themeIsAvailable} />
                     </View>
                     <TextCustom style={styles.subTitle}>{subTitle}</TextCustom>
                 </View>
             </View>
-            <View>
-                <TextCustom>{totalRounds}</TextCustom>
-            </View>
+
+            {!themeIsAvailable && (
+                <ThemeOptionProgressbar totalRounds={totalRounds} roundLimit={roundLimit} />
+            )}
         </View>
     )
 }
@@ -39,7 +47,8 @@ export default ThemeOption;
 const styles = StyleSheet.create({
     mainContainer: {
         flexDirection: "column",
-        padding: 20
+        padding: 20,
+        gap: 20,
     },
     topContainer: {
         flexDirection: "row",
@@ -67,7 +76,7 @@ const styles = StyleSheet.create({
     rightContainer: {
         width: '70%',
         justifyContent: 'center',
-        gap: 5
+        gap: 3,
     },
     titleContainer: {
         flexDirection: 'row',

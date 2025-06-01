@@ -10,6 +10,7 @@ const FontSize = {
        big: 22,
        mid: 20,
        small: 18,
+       tiny: 16,
 };
 
 

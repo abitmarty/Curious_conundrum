@@ -19,9 +19,9 @@ function SetThemeScreen({ navigation }){
             <View style={styles.mainContainer}>
                 <TitleCard>Select themes</TitleCard>
                 <View style={styles.largeCard}>
-                    <ThemeOption subTitle={"500+ casual statements"} >Casual</ThemeOption>
-                    <ThemeOption subTitle={"500+ to spice things up"} >Edgy</ThemeOption>
-                    <ThemeOption subTitle={"Genuinely not fun"} hasBorder={false}>Casual</ThemeOption>
+                    <ThemeOption theme={"casual"} subTitle={"500+ casual statements"}>Casual</ThemeOption>
+                    <ThemeOption theme={"edgy"} subTitle={"500+ to spice things up"} roundLimit={10}>Edgy</ThemeOption>
+                    <ThemeOption theme={"overshare"} subTitle={"Genuinely not fun"} hasBorder={false} roundLimit={100}>Fr-endship</ThemeOption>
                     <ImageBackground
                         source={require('../assets/background/bottom_card_dark_blocked.png')}
                         style={styles.backgroundBottom}
