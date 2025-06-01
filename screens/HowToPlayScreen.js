@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 28,
         overflow: 'hidden',
         zIndex: 0,
-
     },
     backgroundBottom: {
         width: '100%',
